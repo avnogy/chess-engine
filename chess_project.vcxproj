@@ -21,12 +21,17 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Pipe.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="Game.cpp" />
+=======
+    <ClCompile Include="Player.cpp" />
+>>>>>>> 38c89c0c8be59465b6d4d153350363abf4d7d833
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
