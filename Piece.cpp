@@ -1,6 +1,7 @@
 #include "Piece.h"
 
-Piece::Piece(char type, string position):_pieceType(type), _position(position)
+Piece::Piece(char type, string position):
+	_pieceType(type), _position(position)
 {
 }
 
@@ -14,6 +15,8 @@ bool Piece::boardLegality(const string input)
 	return false;
 }
 
+
+//getters and setters
 bool Piece::getPieceColor()
 {
 	//TODO: check if works 

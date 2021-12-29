@@ -2,6 +2,7 @@
 
 Player::Player(const bool isWhite):_isWhite(isWhite)
 {
+	//sets initial king position according to color
 	if (isWhite)
 	{
 		this->_kingPosition = "e1";
@@ -14,6 +15,5 @@ Player::Player(const bool isWhite):_isWhite(isWhite)
 
 Player::~Player()
 {
-
 }
 

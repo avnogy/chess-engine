@@ -25,6 +25,7 @@ public:
 	void setPieceType(const char new_type);
 
 private:
+	//fields
 	string _position;
 	char _pieceType;
 };

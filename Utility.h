@@ -6,3 +6,5 @@
 #define WHITE 1
 
 using std::string;
+using std::cout;
+using std::endl;
