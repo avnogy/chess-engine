@@ -15,6 +15,13 @@ public:
 	//this function is created for each piece type.
 	virtual bool pieceLegality(const string input) = 0;
 
+	//getters and setters
+	string getPosition() const;
+	string setPosition(const string);
+	char getPieceType() const;
+	char setPieceType(const char);
+
+private:
 	string _position;
 	char _pieceType;
 };
