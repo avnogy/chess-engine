@@ -5,7 +5,7 @@ class Piece
 {
 public:
 	//constructor and destructor.
-	Piece();
+	Piece(char type,string position);
 	~Piece();
 
 	//checks if the source and destination squares are equal.
@@ -15,11 +15,14 @@ public:
 	//this function is created for each piece type.
 	virtual bool pieceLegality(const string input) = 0;
 
+	//returns piece color
+	bool getPieceColor();
+
 	//getters and setters
 	string getPosition() const;
-	string setPosition(const string new_position);
+	void setPosition(const string new_position);
 	char getPieceType() const;
-	char setPieceType(const char new_type);
+	void setPieceType(const char new_type);
 
 private:
 	string _position;
