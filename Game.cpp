@@ -18,7 +18,7 @@ Game::Game()
 	{
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
 		{
-
+			this->_board[row][col] = nullptr;
 		}
 	}
 }
