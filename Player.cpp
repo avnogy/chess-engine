@@ -1,18 +1,19 @@
 #include "Player.h"
 
-Player::Player(const bool isWhite):isWhite(isWhite)
+Player::Player(const bool isWhite):_isWhite(isWhite)
 {
 	if (isWhite)
 	{
-		this->kingPosition = "e1";
+		this->_kingPosition = "e1";
 	}
 	else
 	{
-		this->kingPosition = "e8";
+		this->_kingPosition = "e8";
 	}
 }
 
 Player::~Player()
 {
+
 }
 

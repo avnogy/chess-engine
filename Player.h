@@ -3,9 +3,13 @@
 class Player
 {
 public:
+	// constructor & destructor
 	Player(const bool isWhite);
 	~Player();
-	string kingPosition = "";
+
+	// public fields
+	string _kingPosition = "";
 private:
-	bool isWhite;
+	// fields
+	bool _isWhite;
 };
