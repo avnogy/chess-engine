@@ -17,9 +17,9 @@ public:
 
 	//getters and setters
 	string getPosition() const;
-	string setPosition(const string);
+	string setPosition(const string new_position);
 	char getPieceType() const;
-	char setPieceType(const char);
+	char setPieceType(const char new_type);
 
 private:
 	string _position;
