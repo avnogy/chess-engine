@@ -1,10 +1,18 @@
 #include "Utility.h"
 #include "Player.h"
+#include "Piece.h"
 
 #define BOARD_SIDE_LENGTH 8
 
-class Piece;
 class Player;
+class Piece;
+class Empty;
+class Rook;
+class Bishop;
+class Queen;
+class King;
+class Knight;
+class Pawn;
 
 class Game
 {
