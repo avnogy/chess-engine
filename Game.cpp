@@ -1,5 +1,7 @@
 #include "Game.h"
 
+string Game::INITIAL_BOARD = "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr0";
+
 // switches the current player to the other 
 void Game::switchPlayer()
 {
@@ -14,6 +16,7 @@ Game::Game()
 	this->_players[WHITE] = new Player(WHITE);
 	this->_players[BLACK] = new Player(BLACK);
 
+	// initializing every piece on the board
 	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
 	{
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
@@ -29,10 +32,12 @@ Game::~Game()
 	delete this->_players[WHITE];
 	delete this->_players[BLACK];
 
+	// deleting every piece on the board
 	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
 	{
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
 		{
+			// calling the appropriate destructor for every piece
 			switch (this->_board[row][col]->getPieceType())
 			{
 			case '#':

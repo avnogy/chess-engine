@@ -26,7 +26,7 @@ private:
 	void switchPlayer();
 public:
 	// static variable
-	static char* initialBoard;
+	static string INITIAL_BOARD;
 	
 	// constructor & destructor
 	Game();
