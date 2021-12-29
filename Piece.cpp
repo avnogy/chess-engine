@@ -16,8 +16,8 @@ bool Piece::boardLegality(const string input)
 
 bool Piece::getPieceColor()
 {
-	//TODO: check for piece color
-	return false;
+	//TODO: check if works 
+	return isupper(getPieceType());
 }
 
 string Piece::getPosition() const
