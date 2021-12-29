@@ -5,7 +5,7 @@ class Player
 public:
 	Player(const bool isWhite);
 	~Player();
-	char kingPosition[3];
+	char* kingPosition = "";
 private:
 	bool isWhite;
 };
