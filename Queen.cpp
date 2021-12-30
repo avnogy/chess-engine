@@ -7,3 +7,7 @@ Queen::Queen(bool isWhite, string position) : Piece('q', position)
 		this->_pieceType = toupper(this->_pieceType);
 	}
 }
+
+Queen::~Queen()
+{
+}

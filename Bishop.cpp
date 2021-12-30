@@ -7,3 +7,7 @@ Bishop::Bishop(bool isWhite, string position) : Piece('b', position)
 		this->_pieceType = toupper(this->_pieceType);
 	}
 }
+
+Bishop::~Bishop()
+{
+}

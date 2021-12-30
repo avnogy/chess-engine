@@ -7,3 +7,7 @@ Rook::Rook(bool isWhite, string position) : Piece('r', position)
 		this->_pieceType = toupper(this->_pieceType);
 	}
 }
+
+Rook::~Rook()
+{
+}

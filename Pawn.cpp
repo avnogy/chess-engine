@@ -7,3 +7,7 @@ Pawn::Pawn(bool isWhite, string position) : Piece('p', position)
 		this->_pieceType = toupper(this->_pieceType);
 	}
 }
+
+Pawn::~Pawn()
+{
+}

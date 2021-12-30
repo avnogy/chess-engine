@@ -4,3 +4,7 @@ Empty::Empty(string position) : Piece('#', position)
 {
 	
 }
+
+Empty::~Empty()
+{
+}
