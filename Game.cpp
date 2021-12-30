@@ -29,7 +29,7 @@ Game::Game()
 	{
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
 		{
-			int index = row * 8 + col;
+			int index = row * BOARD_SIDE_LENGTH + col;
 			char piece = Game::INITIAL_BOARD[index];
 			Piece* piecePointer = nullptr;
 			string position = utility::indexesToString(row, col);
