@@ -12,5 +12,6 @@ using std::endl;
 namespace utility
 {
 	string indexesToString(int row, int col);
-	double stringToIndexes(string location);
+	void stringToIndexes(string location, int& rowDest, int& colDest);
+	void separateMove(string& intactMove, string& src, string& dst);
 }
