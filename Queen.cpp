@@ -1,4 +1,6 @@
 #include "Queen.h"
+#include "Bishop.h"
+#include "Rook.h"
 
 Queen::Queen(bool isWhite, string position) : Piece('q', position)
 {
@@ -10,4 +12,10 @@ Queen::Queen(bool isWhite, string position) : Piece('q', position)
 
 Queen::~Queen()
 {
+}
+
+// returns true if either rook or bishop can move to the destination
+bool Queen::pieceLegality(string position) const
+{
+	return ((Rook*)this)->boardLegality(position) || ((Bishop*)this)->boardLegality(position);
 }
