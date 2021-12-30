@@ -110,7 +110,7 @@ Game::~Game()
 			case 'P':
 				delete (Pawn*)this->board[row][col];
 			default:
-
+				break;
 			}
 		}
 	}
