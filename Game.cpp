@@ -13,13 +13,13 @@ string Game::INITIAL_BOARD = "RNBKQBNRPPPPPPPP################################pp
 // switches the current player to the other 
 void Game::switchPlayer()
 {
-	_currentPlayer = !_currentPlayer;
+	currentPlayer = !currentPlayer;
 }
 
 // constructor
 Game::Game()
 {
-	this->_currentPlayer = WHITE;
+	this->currentPlayer = WHITE;
 
 	this->_players[WHITE] = new Player(WHITE);
 	this->_players[BLACK] = new Player(BLACK);
