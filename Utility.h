@@ -13,5 +13,5 @@ namespace utility
 {
 	string indexesToString(int row, int col);
 	void stringToIndexes(string location, int& rowDest, int& colDest);
-	void separateMove(string& intactMove, string& src, string& dst);
+	void separateMove(string intactMove, string& src, string& dst);
 }
