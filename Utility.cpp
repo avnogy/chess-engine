@@ -13,4 +13,9 @@ namespace utility
 		locationString += row + '0';
 		return locationString;
 	}
+
+	double stringToIndexes(string location)
+	{
+		return 0.0;
+	}
 }
