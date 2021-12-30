@@ -1,4 +1,12 @@
 #include "Game.h"
+#include "Utility.h"
+#include "Empty.h"
+#include "Rook.h"
+#include "King.h"
+#include "Knight.h"
+#include "Pawn.h"
+#include "Queen.h"
+#include "Bishop.h"
 
 string Game::INITIAL_BOARD = "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr0";
 
@@ -12,7 +20,7 @@ void Game::switchPlayer()
 Game::Game()
 {
 	this->_currentPlayer = WHITE;
-	
+
 	this->_players[WHITE] = new Player(WHITE);
 	this->_players[BLACK] = new Player(BLACK);
 
@@ -21,7 +29,44 @@ Game::Game()
 	{
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
 		{
-			this->_board[row][col] = nullptr;
+			int index = row * 8 + col;
+			char piece = Game::INITIAL_BOARD[index];
+			Piece* piecePointer = nullptr;
+			string position = utility::indexesToString(row, col);
+			switch (piece)
+			{
+			case '#':
+				piecePointer = new Empty(position);
+				break;
+			case 'r':
+			case 'R':
+				piecePointer = new Rook(isupper(piece), position);
+				break;
+			case 'b':
+			case 'B':
+				piecePointer = new Bishop(isupper(piece), position);
+				break;
+			case 'n':
+			case 'N':
+				piecePointer = new Knight(isupper(piece), position);
+				break;
+			case 'q':
+			case 'Q':
+				piecePointer = new Queen(isupper(piece), position);
+				break;
+			case 'k':
+			case 'K':
+				piecePointer = new King(isupper(piece), position);
+				break;
+			case 'p':
+			case 'P':
+				piecePointer = new Pawn(isupper(piece), position);
+				break;
+			default:
+				throw "Unknown piece in initial board string.";
+				break;
+			}
+			this->_board[row][col] = piecePointer;
 		}
 	}
 }
