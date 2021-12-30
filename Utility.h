@@ -8,3 +8,8 @@
 using std::string;
 using std::cout;
 using std::endl;
+
+namespace utility
+{
+	string indexesToString(int row, char col);
+}
