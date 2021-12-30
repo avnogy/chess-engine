@@ -11,6 +11,6 @@ using std::endl;
 
 namespace utility
 {
-	string indexesToString(int row, char col);
+	string indexesToString(int row, int col);
 	double stringToIndexes(string location);
 }
