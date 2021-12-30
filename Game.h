@@ -18,13 +18,13 @@ class Game
 {
 private:
 	// fields
-	Piece* _board[BOARD_SIDE_LENGTH][BOARD_SIDE_LENGTH];
 	bool _currentPlayer;
 	Player* _players[2];
-
 	// helper methods
 	void switchPlayer();
 public:
+	// fields
+	Piece* board[BOARD_SIDE_LENGTH][BOARD_SIDE_LENGTH];
 	// static variable
 	static string INITIAL_BOARD;
 	
