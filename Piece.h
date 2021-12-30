@@ -24,7 +24,7 @@ public:
 	char getPieceType() const;
 	void setPieceType(const char new_type);
 
-private:
+protected:
 	//fields
 	string _position;
 	char _pieceType;
