@@ -42,6 +42,15 @@ bool Engine::isOutOfBounds(string location)
 	}
 }
 
+bool Engine::AreIndexesEqual(string location)
+{
+	//seperating src and dst
+	string src = "", dst = ""; 
+	utility::separateMove(location, src, dst);
+
+	return (src == dst);
+}
+
 
 
 
