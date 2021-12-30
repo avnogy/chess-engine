@@ -1,6 +1,6 @@
 #include "Utility.h"
-
-class King
+#include "Piece.h"
+class King : public Piece
 {
 public:
     King();

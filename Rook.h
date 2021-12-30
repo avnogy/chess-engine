@@ -1,6 +1,6 @@
 #include "Utility.h"
-
-class Rook
+#include "Piece.h"
+class Rook : public Piece
 {
 public:
     Rook();

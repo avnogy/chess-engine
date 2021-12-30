@@ -1,6 +1,6 @@
 #include "Utility.h"
-
-class Bishop
+#include "Piece.h"
+class Bishop : public Piece
 {
 public:
     Bishop();

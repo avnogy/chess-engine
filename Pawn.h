@@ -1,6 +1,6 @@
 #include "Utility.h"
-
-class Pawn
+#include "Piece.h"
+class Pawn : public Piece
 {
 public:
     Pawn();
