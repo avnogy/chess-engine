@@ -7,6 +7,8 @@ public:
 	Player(const bool isWhite);
 	~Player();
 
+	//getter
+	bool isWhite() const;
 	// public fields
 	string _kingPosition = "";
 private:
