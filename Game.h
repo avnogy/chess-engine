@@ -2,7 +2,6 @@
 #include "Player.h"
 #include "Piece.h"
 
-#define BOARD_SIDE_LENGTH 8
 
 class Player;
 class Piece;
