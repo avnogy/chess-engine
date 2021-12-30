@@ -66,7 +66,7 @@ Game::Game()
 				throw "Unknown piece in initial board string.";
 				break;
 			}
-			this->_board[row][col] = piecePointer;
+			this->board[row][col] = piecePointer;
 		}
 	}
 }
@@ -83,32 +83,32 @@ Game::~Game()
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
 		{
 			// calling the appropriate destructor for every piece
-			switch (this->_board[row][col]->getPieceType())
+			switch (this->board[row][col]->getPieceType())
 			{
 			case '#':
-				delete (Empty*)this->_board[row][col];
+				delete (Empty*)this->board[row][col];
 				break;
 			case 'r':
 			case 'R':
-				delete (Rook*)this->_board[row][col];
+				delete (Rook*)this->board[row][col];
 				break;
 			case 'b':
 			case 'B':
-				delete (Bishop*)this->_board[row][col];
+				delete (Bishop*)this->board[row][col];
 				break;
 			case 'n':
 			case 'N':
-				delete (Knight*)this->_board[row][col];
+				delete (Knight*)this->board[row][col];
 				break;
 			case 'q':
 			case 'Q':
-				delete (Queen*)this->_board[row][col];
+				delete (Queen*)this->board[row][col];
 			case 'k':
 			case 'K':
-				delete (King*)this->_board[row][col];
+				delete (King*)this->board[row][col];
 			case 'p':
 			case 'P':
-				delete (Pawn*)this->_board[row][col];
+				delete (Pawn*)this->board[row][col];
 			default:
 
 			}
