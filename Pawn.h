@@ -3,7 +3,7 @@
 class Pawn : public Piece
 {
 public:
-    Pawn();
+    Pawn(bool isWhite, string position);
     ~Pawn();
     virtual bool pieceLegality(string position) const override;
 };

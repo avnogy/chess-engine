@@ -3,7 +3,7 @@
 class Rook : public Piece
 {
 public:
-    Rook();
+    Rook(bool isWhite, string position);
     ~Rook();
     virtual bool pieceLegality(string position) const override;
 };
