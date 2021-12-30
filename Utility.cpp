@@ -2,20 +2,27 @@
 
 namespace utility
 {
+	// returns indexes as col(char)row(int)
+	// example: 4, 1 -> e2
 	string indexesToString(int row, int col)
 	{
 		string locationString = "";
-		if (row > 8 || row < 0 || col > 8 || col < 0)
+		if (row >= 8 || row < 0 || col >= 8 || col < 0)
 		{
 			throw "Invalid index for position string.";
 		}
-		locationString += col - 1 + 'a';
-		locationString += row + '0';
+		locationString += col + 'a';
+		locationString += row + 1 + '0';
 		return locationString;
 	}
 
-	double stringToIndexes(string location)
+	// changes the second and third params according to the first
+	void stringToIndexes(string location, int& rowDest, int& colDest)
 	{
-		return 0.0;
+		// TODO: add exceptions to verify input here
+
+		rowDest = location[1] - 1 - '0';
+
+		colDest = location[0] - 'a';
 	}
 }
