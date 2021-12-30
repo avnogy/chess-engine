@@ -7,3 +7,7 @@ King::King(bool isWhite, string position) : Piece('k', position)
 		this->_pieceType = toupper(this->_pieceType);
 	}
 }
+
+King::~King()
+{
+}

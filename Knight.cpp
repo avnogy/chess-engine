@@ -7,3 +7,7 @@ Knight::Knight(bool isWhite, string position) : Piece('n', position)
 		this->_pieceType = toupper(this->_pieceType);
 	}
 }
+
+Knight::~Knight()
+{
+}
