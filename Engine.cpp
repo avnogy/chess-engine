@@ -20,6 +20,28 @@ bool Engine::isDstOccupied(Game& game, string location)
 	return (pType != '#' && game.board[row][col]->getPieceColor() == game.currentPlayer);
 }
 
+bool Engine::isOutOfBounds(string location)
+{
+	int row = 0, col = 0;
+	string src = "", dst = "";
+	
+	//seperating src and dst
+	utility::separateMove(location, src, dst);
+
+	//checking src
+	utility::stringToIndexes(src, row, col);
+	if (row < 1 || row > BOARD_SIDE_LENGTH || col < 1 || col > BOARD_SIDE_LENGTH)
+	{
+		return true;
+	}
+	//checking dst
+	utility::stringToIndexes(dst, row, col);
+	if (row < 1 || row > BOARD_SIDE_LENGTH || col < 1 || col > BOARD_SIDE_LENGTH)
+	{
+		return true;
+	}
+}
+
 
 
 
