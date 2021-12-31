@@ -2,6 +2,8 @@
 #include "Piece.h"
 class King : public Piece
 {
+private:
+    bool _canCastle;
 public:
     King(bool isWhite);
     ~King();

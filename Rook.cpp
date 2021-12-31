@@ -2,6 +2,7 @@
 
 Rook::Rook(bool isWhite) : Piece('r')
 {
+	this->_canCastle = true;
 	if (isWhite)
 	{
 		this->_pieceType = toupper(this->_pieceType);

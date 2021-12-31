@@ -2,6 +2,7 @@
 
 King::King(bool isWhite) : Piece('k')
 {
+	this->_canCastle = true;
 	if (isWhite)
 	{
 		this->_pieceType = toupper(this->_pieceType);
