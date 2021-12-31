@@ -3,7 +3,7 @@
 class Bishop : public Piece
 {
 public:
-    Bishop(bool isWhite, string position);
+    Bishop(bool isWhite);
     ~Bishop();
-    virtual bool pieceLegality(string position) const override;
+    virtual bool pieceLegality(const string route) const override;
 };

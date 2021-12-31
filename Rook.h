@@ -3,7 +3,7 @@
 class Rook : public Piece
 {
 public:
-    Rook(bool isWhite, string position);
+    Rook(bool isWhite);
     ~Rook();
-    virtual bool pieceLegality(string position) const override;
+    virtual bool pieceLegality(const string route) const override;
 };

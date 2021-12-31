@@ -3,7 +3,7 @@
 class King : public Piece
 {
 public:
-    King(bool isWhite, string position);
+    King(bool isWhite);
     ~King();
-    virtual bool pieceLegality(string position) const override;
+    virtual bool pieceLegality(const string route) const override;
 };

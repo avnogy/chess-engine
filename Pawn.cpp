@@ -4,7 +4,7 @@
 #define COL 0
 #define ROW 1
 
-Pawn::Pawn(bool isWhite, string position) : Piece('p', position)
+Pawn::Pawn(bool isWhite) : Piece('p')
 {
 	if (isWhite)
 	{
@@ -17,13 +17,13 @@ Pawn::~Pawn()
 }
 
 // returns true if pawn can move to the destination
-bool Pawn::pieceLegality(string position) const
+bool Pawn::pieceLegality(const string route) const
 {
 	string destination = "";
 	string source = "";
 	int forwardDirection = 1;
 	bool isInInitialPosition = false;
-	utility::separateMove(position, source, destination);
+	utility::separateMove(route, source, destination);
 
 	if (islower(this->_pieceType)) // if pawn is black
 	{

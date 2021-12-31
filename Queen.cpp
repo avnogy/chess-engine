@@ -2,7 +2,7 @@
 #include "Bishop.h"
 #include "Rook.h"
 
-Queen::Queen(bool isWhite, string position) : Piece('q', position)
+Queen::Queen(bool isWhite) : Piece('q')
 {
 	if (isWhite)
 	{
@@ -15,7 +15,7 @@ Queen::~Queen()
 }
 
 // returns true if either rook or bishop can move to the destination
-bool Queen::pieceLegality(string position) const
+bool Queen::pieceLegality(const string route) const
 {
-	return ((Rook*)this)->boardLegality(position) || ((Bishop*)this)->boardLegality(position);
+	return ((Rook*)this)->boardLegality(route) || ((Bishop*)this)->boardLegality(route);
 }

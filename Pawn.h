@@ -7,7 +7,7 @@
 class Pawn : public Piece
 {
 public:
-    Pawn(bool isWhite, string position);
+    Pawn(bool isWhite);
     ~Pawn();
-    virtual bool pieceLegality(string position) const override;
+    virtual bool pieceLegality(const string route) const override;
 };

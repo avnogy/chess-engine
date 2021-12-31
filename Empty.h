@@ -3,7 +3,7 @@
 class Empty: public Piece
 {
 public:
-    Empty(string position);
+    Empty();
     ~Empty();
-    virtual bool pieceLegality(string position) const override;
+    virtual bool pieceLegality(const string route) const override;
 };

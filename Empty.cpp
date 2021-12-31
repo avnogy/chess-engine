@@ -1,6 +1,6 @@
 #include "Empty.h"
 
-Empty::Empty(string position) : Piece('#', position)
+Empty::Empty() : Piece('#')
 {
 	
 }
@@ -10,7 +10,7 @@ Empty::~Empty()
 }
 
 // an empty piece cannot move anywhere
-bool Empty::pieceLegality(string position) const
+bool Empty::pieceLegality(const string route) const
 {
 	return false;
 }
