@@ -76,35 +76,41 @@ void Game::clearBoard()
 	{
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
 		{
-			// calling the appropriate destructor for every piece
-			switch (this->board[row][col]->getPieceType())
+			if (this->board[row][col] != nullptr)
 			{
-			case '#':
-				delete (Empty*)this->board[row][col];
-				break;
-			case 'r':
-			case 'R':
-				delete (Rook*)this->board[row][col];
-				break;
-			case 'b':
-			case 'B':
-				delete (Bishop*)this->board[row][col];
-				break;
-			case 'n':
-			case 'N':
-				delete (Knight*)this->board[row][col];
-				break;
-			case 'q':
-			case 'Q':
-				delete (Queen*)this->board[row][col];
-			case 'k':
-			case 'K':
-				delete (King*)this->board[row][col];
-			case 'p':
-			case 'P':
-				delete (Pawn*)this->board[row][col];
-			default:
-				throw "detected Unknown piece in board while clearing board.";
+				// calling the appropriate destructor for every piece
+				switch (this->board[row][col]->getPieceType())
+				{
+				case '#':
+					delete (Empty*)this->board[row][col];
+					break;
+				case 'r':
+				case 'R':
+					delete (Rook*)this->board[row][col];
+					break;
+				case 'b':
+				case 'B':
+					delete (Bishop*)this->board[row][col];
+					break;
+				case 'n':
+				case 'N':
+					delete (Knight*)this->board[row][col];
+					break;
+				case 'q':
+				case 'Q':
+					delete (Queen*)this->board[row][col];
+					break;
+				case 'k':
+				case 'K':
+					delete (King*)this->board[row][col];
+					break;
+				case 'p':
+				case 'P':
+					delete (Pawn*)this->board[row][col];
+					break;
+				default:
+					throw "detected Unknown piece in board while clearing board.";
+				}
 			}
 		}
 	}
@@ -119,6 +125,13 @@ Game::Game()
 	this->_players[BLACK] = new Player(BLACK);
 
 	// initializing board as the standard chess board
+	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
+	{
+		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
+		{
+			this->board[row][col] = nullptr;
+		}
+	}
 	copyBoardFromString(Game::INITIAL_BOARD);
 }
 
@@ -130,4 +143,17 @@ Game::~Game()
 
 	// deleting every piece on the board
 	clearBoard();
+}
+
+// prints the board to std::cout
+void Game::printBoard()
+{
+	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
+	{
+		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
+		{
+			cout << this->board[row][col]->getPieceType() << " ";
+		}
+		cout << endl;
+	}
 }

@@ -34,5 +34,6 @@ public:
 	~Game();
 	
 	// methods
+	void printBoard();
 	void move(char* moveData);
 };
