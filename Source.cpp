@@ -16,6 +16,9 @@ using std::string;
 int main()
 {
 	Game game;
+	string myBoard = "RNB#QBNRPPPKPPPP###########P#######p############pppkpppprnb#qbnr";
+	game.copyBoardFromString(myBoard);
+
 	game.printBoard();
 
 	return 0;

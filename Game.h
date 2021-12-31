@@ -20,7 +20,6 @@ private:
 	Player* _players[2];
 	// helper methods
 	void switchPlayer();
-	void copyBoardFromString(string boardString);
 	void clearBoard();
 public:
 	// fields
@@ -34,6 +33,7 @@ public:
 	~Game();
 	
 	// methods
+	void copyBoardFromString(string boardString);
 	void printBoard();
 	void move(char* moveData);
 };

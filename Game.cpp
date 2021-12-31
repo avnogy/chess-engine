@@ -30,7 +30,7 @@ void Game::copyBoardFromString(string boardString)
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
 		{
 			int index = row * BOARD_SIDE_LENGTH + col;
-			char piece = Game::INITIAL_BOARD[index];
+			char piece = boardString[index];
 			Piece* piecePointer = nullptr;
 			switch (piece)
 			{
@@ -111,6 +111,7 @@ void Game::clearBoard()
 				default:
 					throw "detected Unknown piece in board while clearing board.";
 				}
+				this->board[row][col] = nullptr; // discarding invalid pointers
 			}
 		}
 	}
