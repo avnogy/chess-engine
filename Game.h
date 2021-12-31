@@ -20,6 +20,7 @@ private:
 	Player* _players[2];
 	// helper methods
 	void switchPlayer();
+	void copyBoardFromString(string boardString);
 public:
 	// fields
 	bool currentPlayer;

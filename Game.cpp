@@ -16,15 +16,9 @@ void Game::switchPlayer()
 	currentPlayer = !currentPlayer;
 }
 
-// constructor
-Game::Game()
+// initialize board according to a string
+void Game::copyBoardFromString(string boardString)
 {
-	this->currentPlayer = WHITE;
-
-	this->_players[WHITE] = new Player(WHITE);
-	this->_players[BLACK] = new Player(BLACK);
-
-	// initializing every piece on the board
 	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
 	{
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
@@ -68,6 +62,18 @@ Game::Game()
 			this->board[row][col] = piecePointer;
 		}
 	}
+}
+
+// constructor
+Game::Game()
+{
+	this->currentPlayer = WHITE;
+
+	this->_players[WHITE] = new Player(WHITE);
+	this->_players[BLACK] = new Player(BLACK);
+
+	// initializing every piece on the board
+	copyBoardFromString(Game::INITIAL_BOARD);
 }
 
 // destructor
