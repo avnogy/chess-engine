@@ -1,5 +1,9 @@
 #include "Utility.h"
 #include "Piece.h"
+
+#define WHITE_INITIAL_ROW '2'
+#define BLACK_INITIAL_ROW '7'
+
 class Pawn : public Piece
 {
 public:
