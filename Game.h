@@ -21,6 +21,7 @@ private:
 	// helper methods
 	void switchPlayer();
 	void copyBoardFromString(string boardString);
+	void clearBoard();
 public:
 	// fields
 	bool currentPlayer;

@@ -19,6 +19,7 @@ void Game::switchPlayer()
 // initialize board according to a string
 void Game::copyBoardFromString(string boardString)
 {
+	clearBoard();
 	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
 	{
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
@@ -56,33 +57,16 @@ void Game::copyBoardFromString(string boardString)
 				piecePointer = new Pawn(isupper(piece));
 				break;
 			default:
-				throw "Unknown piece in initial board string.";
-				break;
+				throw "Unknown piece in board string.";
 			}
 			this->board[row][col] = piecePointer;
 		}
 	}
 }
 
-// constructor
-Game::Game()
+// frees all memory allocated on the board
+void Game::clearBoard()
 {
-	this->currentPlayer = WHITE;
-
-	this->_players[WHITE] = new Player(WHITE);
-	this->_players[BLACK] = new Player(BLACK);
-
-	// initializing every piece on the board
-	copyBoardFromString(Game::INITIAL_BOARD);
-}
-
-// destructor
-Game::~Game()
-{
-	delete this->_players[WHITE];
-	delete this->_players[BLACK];
-
-	// deleting every piece on the board
 	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
 	{
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
@@ -115,8 +99,30 @@ Game::~Game()
 			case 'P':
 				delete (Pawn*)this->board[row][col];
 			default:
-				break;
+				throw "detected Unknown piece in board while clearing board.";
 			}
 		}
 	}
+}
+
+// constructor
+Game::Game()
+{
+	this->currentPlayer = WHITE;
+
+	this->_players[WHITE] = new Player(WHITE);
+	this->_players[BLACK] = new Player(BLACK);
+
+	// initializing board as the standard chess board
+	copyBoardFromString(Game::INITIAL_BOARD);
+}
+
+// destructor
+Game::~Game()
+{
+	delete this->_players[WHITE];
+	delete this->_players[BLACK];
+
+	// deleting every piece on the board
+	clearBoard();
 }
