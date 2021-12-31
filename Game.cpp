@@ -20,6 +20,11 @@ void Game::switchPlayer()
 void Game::copyBoardFromString(string boardString)
 {
 	clearBoard();
+	if (boardString.length() < BOARD_SIDE_LENGTH * BOARD_SIDE_LENGTH)
+	{
+		throw "Unable to read string in order to copy board";
+	}
+
 	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
 	{
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
