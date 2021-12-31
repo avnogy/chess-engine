@@ -1,7 +1,7 @@
 #include "Piece.h"
 
-Piece::Piece(char type, string position):
-	_pieceType(type), _position(position)
+Piece::Piece(char type):
+	_pieceType(type)
 {
 }
 
@@ -21,16 +21,6 @@ bool Piece::getPieceColor()
 {
 	//TODO: check if works 
 	return isupper(getPieceType());
-}
-
-string Piece::getPosition() const
-{
-	return this->_position;
-}
-
-void Piece::setPosition(const string new_position)
-{
-	this->_position = new_position;
 }
 
 char Piece::getPieceType() const
