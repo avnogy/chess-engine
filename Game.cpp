@@ -32,35 +32,34 @@ Game::Game()
 			int index = row * BOARD_SIDE_LENGTH + col;
 			char piece = Game::INITIAL_BOARD[index];
 			Piece* piecePointer = nullptr;
-			string position = utility::indexesToString(row, col);
 			switch (piece)
 			{
 			case '#':
-				piecePointer = new Empty(position);
+				piecePointer = new Empty();
 				break;
 			case 'r':
 			case 'R':
-				piecePointer = new Rook(isupper(piece), position);
+				piecePointer = new Rook(isupper(piece));
 				break;
 			case 'b':
 			case 'B':
-				piecePointer = new Bishop(isupper(piece), position);
+				piecePointer = new Bishop(isupper(piece));
 				break;
 			case 'n':
 			case 'N':
-				piecePointer = new Knight(isupper(piece), position);
+				piecePointer = new Knight(isupper(piece));
 				break;
 			case 'q':
 			case 'Q':
-				piecePointer = new Queen(isupper(piece), position);
+				piecePointer = new Queen(isupper(piece));
 				break;
 			case 'k':
 			case 'K':
-				piecePointer = new King(isupper(piece), position);
+				piecePointer = new King(isupper(piece));
 				break;
 			case 'p':
 			case 'P':
-				piecePointer = new Pawn(isupper(piece), position);
+				piecePointer = new Pawn(isupper(piece));
 				break;
 			default:
 				throw "Unknown piece in initial board string.";
