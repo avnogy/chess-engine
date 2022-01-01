@@ -4,15 +4,18 @@
 
 bool Engine::isSrcPiece(Game &game,string location)
 {
+	//seperating src and dst
 	string src = "", dst = "";
 	utility::separateMove(location, src, dst);
+
+	//checking if piece at source is not empty
 	char pType = Piece::getPieceFromString(game, src)->getPieceType();
 	return pType != '#';
 }
 
 bool Engine::isDstOccupied(Game& game, string location)
 {
-	//seperating src and dst
+	//seperating src and dst locations
 	string src = "", dst = "";
 	utility::separateMove(location, src, dst);
 	
@@ -33,13 +36,14 @@ bool Engine::isOutOfBounds(string location)
 	//seperating src and dst
 	utility::separateMove(location, src, dst);
 
-	//checking src
+	//checking if source is out of bounds
 	utility::stringToIndexes(src, row, col);
 	if (row < 1 || row > BOARD_SIDE_LENGTH || col < 1 || col > BOARD_SIDE_LENGTH)
 	{
 		return true;
 	}
-	//checking dst
+
+	//checking if destination is out of bounds
 	utility::stringToIndexes(dst, row, col);
 	if (row < 1 || row > BOARD_SIDE_LENGTH || col < 1 || col > BOARD_SIDE_LENGTH)
 	{
@@ -53,6 +57,7 @@ bool Engine::AreIndexesEqual(string location)
 	string src = "", dst = ""; 
 	utility::separateMove(location, src, dst);
 
+	//checking if source and destination locations are equal
 	return (src == dst);
 }
 
