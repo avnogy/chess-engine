@@ -1,5 +1,7 @@
+#pragma once
 #include "Utility.h"
 #include "Game.h"
+#include "Piece.h"
 
 class Engine
 {

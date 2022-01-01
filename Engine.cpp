@@ -1,23 +1,28 @@
 #include "Engine.h"
 
+
+
 bool Engine::isSrcPiece(Game &game,string location)
 {
 	string src = "", dst = "";
 	utility::separateMove(location, src, dst);
-	int row = 0, col = 0;
-	utility::stringToIndexes(src,row,col);
-	char pType = game.board[row][col]->getPieceType();
+	char pType = Piece::getPieceFromString(game, src)->getPieceType();
 	return pType != '#';
 }
 
 bool Engine::isDstOccupied(Game& game, string location)
 {
+	//seperating src and dst
 	string src = "", dst = "";
 	utility::separateMove(location, src, dst);
-	int row = 0, col = 0;
-	utility::stringToIndexes(dst, row, col);
-	char pType = game.board[row][col]->getPieceType();
-	return (pType != '#' && game.board[row][col]->getPieceColor() == game.currentPlayer);
+	
+	//getting piece from dst location
+	Piece* dstPiece = nullptr;
+	dstPiece = Piece::getPieceFromString(game, dst);
+
+	//checking if piece is not same color as player or empty 
+	char pType = dstPiece->getPieceType();
+	return (pType != '#' && dstPiece->getPieceColor() == game.currentPlayer);
 }
 
 bool Engine::isOutOfBounds(string location)
