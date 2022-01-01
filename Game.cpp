@@ -77,44 +77,50 @@ void Game::clearBoard()
 	{
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
 		{
-			if (this->board[row][col] != nullptr)
-			{
-				// calling the appropriate destructor for every piece
-				switch (this->board[row][col]->getPieceType())
-				{
-				case '#':
-					delete (Empty*)this->board[row][col];
-					break;
-				case 'r':
-				case 'R':
-					delete (Rook*)this->board[row][col];
-					break;
-				case 'b':
-				case 'B':
-					delete (Bishop*)this->board[row][col];
-					break;
-				case 'n':
-				case 'N':
-					delete (Knight*)this->board[row][col];
-					break;
-				case 'q':
-				case 'Q':
-					delete (Queen*)this->board[row][col];
-					break;
-				case 'k':
-				case 'K':
-					delete (King*)this->board[row][col];
-					break;
-				case 'p':
-				case 'P':
-					delete (Pawn*)this->board[row][col];
-					break;
-				default:
-					throw "detected Unknown piece in board while clearing board.";
-				}
-				this->board[row][col] = nullptr; // discarding invalid pointers
-			}
+			removePiece(row, col);
 		}
+	}
+}
+
+void Game::removePiece(int row, int col)
+{
+	if (this->board[row][col] != nullptr)
+	{
+		// calling the appropriate destructor for every piece
+		switch (this->board[row][col]->getPieceType())
+		{
+		case '#':
+			delete (Empty*)this->board[row][col];
+			break;
+		case 'r':
+		case 'R':
+			delete (Rook*)this->board[row][col];
+			break;
+		case 'b':
+		case 'B':
+			delete (Bishop*)this->board[row][col];
+			break;
+		case 'n':
+		case 'N':
+			delete (Knight*)this->board[row][col];
+			break;
+		case 'q':
+		case 'Q':
+			delete (Queen*)this->board[row][col];
+			break;
+		case 'k':
+		case 'K':
+			delete (King*)this->board[row][col];
+			break;
+		case 'p':
+		case 'P':
+			delete (Pawn*)this->board[row][col];
+			break;
+		default:
+			throw "detected Unknown piece in board while clearing board.";
+		}
+
+		this->board[row][col] = nullptr; // discarding invalid pointers
 	}
 }
 
@@ -175,8 +181,19 @@ void Game::move(string moveData)
 		//check board validity
 		if (Engine::boardLegality(*this, moveData, isHorse))
 		{
-			//TODO: move
+			//getting indexes
+			int srcRow = 0,srcCol = 0,dstRow = 0,dstCol = 0;
+			utility::stringToIndexes(src, srcRow, srcCol);
+			utility::stringToIndexes(dst, dstRow, dstCol);
 
+			//destroying dest piece
+			removePiece(dstRow, dstCol);
+			//moving src piece
+			this->board[dstRow][dstCol] = this->board[srcRow][srcCol];
+			//putting nothing in src location
+			this->board[srcRow][srcCol] = new Empty();
+
+			//end of turn
 			switchPlayer();
 
 			//TODO: send data to pipe

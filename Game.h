@@ -22,6 +22,7 @@ private:
 	// helper methods
 	void switchPlayer();
 	void clearBoard();
+	void removePiece(int row, int col);
 public:
 	// fields
 	bool currentPlayer;
