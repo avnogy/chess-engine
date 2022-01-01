@@ -15,8 +15,6 @@ public:
 	//this function is created for each piece type.
 	virtual bool pieceLegality(const string route) const = 0;
 
-	static Piece* getPieceFromString(Game game, string location);
-
 	//returns piece color
 	bool getPieceColor();
 

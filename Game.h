@@ -1,3 +1,4 @@
+#pragma once
 #include "Utility.h"
 #include "Player.h"
 #include "Piece.h"
@@ -33,7 +34,8 @@ public:
 	~Game();
 	
 	// methods
+	Piece* getPieceFromString(string location);
 	void copyBoardFromString(string boardString);
 	void printBoard();
-	void move(char* moveData);
+	//void move(string moveData);
 };

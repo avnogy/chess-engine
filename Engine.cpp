@@ -9,7 +9,7 @@ bool Engine::isSrcPiece(Game &game,string location)
 	utility::separateMove(location, src, dst);
 
 	//checking if piece at source is not empty
-	char pType = Piece::getPieceFromString(game, src)->getPieceType();
+	char pType = game.getPieceFromString(src)->getPieceType();
 	return pType != '#';
 }
 
@@ -21,7 +21,7 @@ bool Engine::isDstOccupied(Game& game, string location)
 	
 	//getting piece from dst location
 	Piece* dstPiece = nullptr;
-	dstPiece = Piece::getPieceFromString(game, dst);
+	dstPiece = game.getPieceFromString(dst);
 
 	//checking if piece is not same color as player or empty 
 	char pType = dstPiece->getPieceType();

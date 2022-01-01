@@ -7,6 +7,7 @@
 #include "Pawn.h"
 #include "Queen.h"
 #include "Bishop.h"
+#include "Piece.h"
 
 string Game::INITIAL_BOARD = "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr0";
 
@@ -157,4 +158,12 @@ void Game::printBoard()
 		}
 		cout << endl;
 	}
+}
+
+
+Piece* Game::getPieceFromString(string location)
+{
+	int row = 0, col = 0;
+	utility::stringToIndexes(location, row, col);
+	return this->board[row][col];
 }
