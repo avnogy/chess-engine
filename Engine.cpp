@@ -63,7 +63,7 @@ bool Engine::areIndexesEqual(string location)
 	return (src == dst);
 }
 
-bool Engine::boardValidity(Game& game, string location, bool isHorse)
+bool Engine::boardLegality(Game& game, string location, bool isHorse)
 {
 	return(!isSrcPiece(game, location)
 		&& isDstOccupied(game, location)

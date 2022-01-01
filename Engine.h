@@ -9,7 +9,7 @@ public:
 	//utility functions
 	static bool isCheckmate(Game& game, string location);
 	
-	static bool boardValidity(Game& game, string location,bool isHorse);
+	static bool boardLegality(Game& game, string location,bool isHorse);
 
 	//board validity functions
 	static bool isSrcPiece(Game& game, string location);
