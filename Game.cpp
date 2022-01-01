@@ -160,6 +160,39 @@ void Game::printBoard()
 	}
 }
 
+void Game::move(string moveData)
+{
+	//seperating src and dst
+	string src = "", dst = "";
+	utility::separateMove(moveData, src, dst);
+
+	//check piece validity
+	if (this->getPieceFromString(src)->pieceLegality(dst))
+	{
+		//check piece type for blocking pieces check
+		bool isHorse = tolower(this->getPieceFromString(src)->getPieceType()) == 'h';
+
+		//check board validity
+		if (Engine::boardLegality(*this, moveData, isHorse))
+		{
+			//TODO: move
+
+			switchPlayer();
+
+			//TODO: send data to pipe
+
+		}
+		else
+		{
+			//TODO: send error data to pipe
+		}
+	}
+	else
+	{
+		//TODO: send error data to pipe
+	}
+}
+
 
 Piece* Game::getPieceFromString(string location)
 {
