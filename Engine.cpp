@@ -29,6 +29,12 @@ bool Engine::isDstOccupied(Game& game, string location)
 	return (pType != '#' && dstPiece->getPieceColor() == game.currentPlayer);
 }
 
+bool Engine::doesCauseDiscovery(Game& game, string location)
+{
+	//TODO: implement discovery
+	return false;
+}
+
 //returns true if out of bounds
 bool Engine::isOutOfBounds(string location)
 {
@@ -61,6 +67,18 @@ bool Engine::areIndexesEqual(string location)
 
 	//checking if source and destination locations are equal
 	return (src == dst);
+}
+
+bool Engine::isPathBlocked(Game& game, string location)
+{
+	//TODO: implement blocking
+	return false;
+}
+
+bool Engine::isCheckmate(Game& game, string location)
+{
+	//TODO: implement checkmate
+	return false;
 }
 
 bool Engine::boardLegality(Game& game, string location, bool isHorse)
