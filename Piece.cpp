@@ -16,11 +16,11 @@ bool Piece::boardLegality(const string input)
 }
 
 
-Piece& Piece::getPieceFromString(Game game,string location)
+Piece* Piece::getPieceFromString(Game game,string location)
 {
 	int row = 0, col = 0;
 	utility::stringToIndexes(location, row, col);
-	return *(game.board[row][col]);
+	return game.board[row][col];
 }
 
 //getters and setters
