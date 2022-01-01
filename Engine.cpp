@@ -1,7 +1,7 @@
 #include "Engine.h"
 
 
-
+// returns true if source piece is valid
 bool Engine::isSrcPiece(Game &game,string location)
 {
 	//seperating src and dst
@@ -13,6 +13,7 @@ bool Engine::isSrcPiece(Game &game,string location)
 	return pType != '#';
 }
 
+// returns true if can go there
 bool Engine::isDstOccupied(Game& game, string location)
 {
 	//seperating src and dst locations
@@ -28,6 +29,7 @@ bool Engine::isDstOccupied(Game& game, string location)
 	return (pType != '#' && dstPiece->getPieceColor() == game.currentPlayer);
 }
 
+//returns true if out of bounds
 bool Engine::isOutOfBounds(string location)
 {
 	int row = 0, col = 0;
@@ -51,7 +53,7 @@ bool Engine::isOutOfBounds(string location)
 	}
 }
 
-bool Engine::AreIndexesEqual(string location)
+bool Engine::areIndexesEqual(string location)
 {
 	//seperating src and dst
 	string src = "", dst = ""; 
@@ -59,6 +61,16 @@ bool Engine::AreIndexesEqual(string location)
 
 	//checking if source and destination locations are equal
 	return (src == dst);
+}
+
+bool Engine::boardValidity(Game& game, string location, bool isHorse)
+{
+	return(!isSrcPiece(game, location)
+		&& isDstOccupied(game, location)
+		&& !doesCauseDiscovery(game, location)
+		&& !isOutOfBounds(location)
+		&& !areIndexesEqual(location)
+		&& (isHorse || !isPathBlocked(game, location)));
 }
 
 
