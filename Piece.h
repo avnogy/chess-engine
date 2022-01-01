@@ -1,6 +1,6 @@
 #pragma once
 #include "Utility.h"
-
+#include "Game.h"
 class Piece
 {
 public:
@@ -14,6 +14,8 @@ public:
 	//checks if destination square is according to piece movement.
 	//this function is created for each piece type.
 	virtual bool pieceLegality(const string route) const = 0;
+
+	static Piece& getPieceFromString(Game game, string location);
 
 	//returns piece color
 	bool getPieceColor();
