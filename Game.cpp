@@ -1,13 +1,4 @@
 #include "Game.h"
-#include "Utility.h"
-#include "Empty.h"
-#include "Rook.h"
-#include "King.h"
-#include "Knight.h"
-#include "Pawn.h"
-#include "Queen.h"
-#include "Bishop.h"
-#include "Piece.h"
 
 string Game::INITIAL_BOARD = "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr0";
 
@@ -173,7 +164,7 @@ void Game::move(string moveData)
 	utility::separateMove(moveData, src, dst);
 
 	//check piece validity
-	if (this->getPieceFromString(src)->pieceLegality(dst))
+	if (this->getPieceFromString(src)->pieceLegality(moveData))
 	{
 		//check piece type for blocking pieces check
 		bool isKnight = tolower(this->getPieceFromString(src)->getPieceType()) == 'n';

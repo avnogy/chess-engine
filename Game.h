@@ -3,6 +3,13 @@
 #include "Player.h"
 #include "Piece.h"
 #include "Engine.h"
+#include "Empty.h"
+#include "Rook.h"
+#include "King.h"
+#include "Knight.h"
+#include "Pawn.h"
+#include "Queen.h"
+#include "Bishop.h"
 
 class Player;
 class Piece;

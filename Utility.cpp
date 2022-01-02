@@ -29,7 +29,11 @@ namespace utility
 	// separates the source and destination of a move string
 	void separateMove(string intactMove, string& src, string& dst)
 	{
-		src = intactMove[0] + intactMove[1];
-		dst = intactMove[2] + intactMove[3];
+		src = "";
+		src += intactMove[0];
+		src += intactMove[1];
+		dst = "";
+		dst += intactMove[2];
+		dst += intactMove[3];
 	}
 }

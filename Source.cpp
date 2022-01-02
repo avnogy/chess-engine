@@ -9,6 +9,7 @@ in order to read and write information from and to the Backend
 #include <thread>
 #include "Game.h"
 
+using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
@@ -16,11 +17,16 @@ using std::string;
 int main()
 {
 	Game game;
-	string myBoard = "RNB#QBNRPPPKPPPP###########P#######p############pppkpppprnb#qbnr";
+	string myBoard = "R##K#######################################################k###r";
+	string movementInput = "";
 	game.copyBoardFromString(myBoard);
 
-	game.printBoard();
-
+	while (true) // TODO: detect checkmate
+	{
+		game.printBoard();
+		cin >> movementInput;
+		game.move(movementInput);
+	}
 	return 0;
 }
 
