@@ -96,7 +96,7 @@ bool Engine::isPathBlocked(Game& game, string location)
 		if (srcRow == dstRow)//if moving on x axis
 		{
 			bool flag = false;
-			for (int i = 0; i < abs(srcCol - dstCol) && !flag; i++)
+			for (int i = 1; i <= abs(srcCol - dstCol) && !flag; i++)
 			{
 				if (srcCol > dstCol)
 				{
@@ -148,6 +148,6 @@ bool Engine::boardLegality(Game& game, string location)
 		//&& !doesCauseDiscovery(game, location) //           TODO
 		&& !isOutOfBounds(location) //                      implemented
 		&& !areIndexesEqual(location) //                    implemented
-		//&& !isPathBlocked(game, location) //            TODO
+		&& !isPathBlocked(game, location) //            TODO
 		;
 }
