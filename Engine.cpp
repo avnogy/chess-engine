@@ -57,6 +57,8 @@ bool Engine::isOutOfBounds(string location)
 	{
 		return true;
 	}
+
+	return false; // if neither src nor dst are out of bounds return false
 }
 
 bool Engine::areIndexesEqual(string location)
@@ -90,8 +92,3 @@ bool Engine::boardLegality(Game& game, string location, bool isHorse)
 		&& !areIndexesEqual(location)
 		&& (isHorse || !isPathBlocked(game, location)));
 }
-
-
-
-
-
