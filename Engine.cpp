@@ -48,14 +48,14 @@ bool Engine::isOutOfBounds(string location)
 
 	//checking if source is out of bounds
 	utility::stringToIndexes(src, row, col);
-	if (row < 1 || row > BOARD_SIDE_LENGTH || col < 1 || col > BOARD_SIDE_LENGTH)
+	if (row < 0 || row >= BOARD_SIDE_LENGTH || col < 0 || col >= BOARD_SIDE_LENGTH)
 	{
 		return true;
 	}
 
 	//checking if destination is out of bounds
 	utility::stringToIndexes(dst, row, col);
-	if (row < 1 || row > BOARD_SIDE_LENGTH || col < 1 || col > BOARD_SIDE_LENGTH)
+	if (row < 0 || row >= BOARD_SIDE_LENGTH || col < 0 || col >= BOARD_SIDE_LENGTH)
 	{
 		return true;
 	}
@@ -87,10 +87,11 @@ bool Engine::isCheckmate(Game& game, string location)
 
 bool Engine::boardLegality(Game& game, string location)
 {
-	return(!canSrcMove(game, location) //                   implemented
-		&& isDstOccupied(game, location) //                 implemented
-		&& !doesCauseDiscovery(game, location) //           TODO
+	return canSrcMove(game, location) //                   implemented
+		&& !isDstOccupied(game, location) //                 implemented
+		//&& !doesCauseDiscovery(game, location) //           TODO
 		&& !isOutOfBounds(location) //                      implemented
 		&& !areIndexesEqual(location) //                    implemented
-		&& (!isPathBlocked(game, location))); //            TODO
+		//&& !isPathBlocked(game, location) //            TODO
+		;
 }
