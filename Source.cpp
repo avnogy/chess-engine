@@ -17,7 +17,7 @@ using std::string;
 int main()
 {
 	Game game;
-	string myBoard = "###K####PPPPPPPP################################pppppppp###k####";
+	string myBoard = "####K#########################R##########r##################k###";
 	string movementInput = "";
 	game.copyBoardFromString(myBoard);
 

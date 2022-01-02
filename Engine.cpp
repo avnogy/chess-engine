@@ -100,11 +100,11 @@ bool Engine::isPathBlocked(Game& game, string location)
 			{
 				if (srcCol > dstCol)
 				{
-					flag = flag || game.board[srcRow][srcCol - i]->getPieceType() == '#';
+					flag = flag || game.board[srcRow][srcCol - i]->getPieceType() != '#';
 				}
 				else
 				{
-					flag = flag || game.board[srcRow][srcCol + i]->getPieceType() == '#';
+					flag = flag || game.board[srcRow][srcCol + i]->getPieceType() != '#';
 				}
 			}
 			return flag;
@@ -116,11 +116,11 @@ bool Engine::isPathBlocked(Game& game, string location)
 			{
 				if (srcRow > dstRow)
 				{
-					flag = flag || game.board[dstRow - i][dstCol]->getPieceType() == '#';
+					flag = flag || game.board[dstRow - i][dstCol]->getPieceType() != '#';
 				}
 				else
 				{
-					flag = flag || game.board[srcRow + i][srcCol]->getPieceType() == '#';
+					flag = flag || game.board[srcRow + i][srcCol]->getPieceType() != '#';
 				}
 			}
 			return flag;
