@@ -169,10 +169,18 @@ void Game::move(string moveData)
 		//check board validity
 		if (Engine::boardLegality(*this, moveData))
 		{
+			// executing move
+			
 			//getting indexes
 			int srcRow = 0,srcCol = 0,dstRow = 0,dstCol = 0;
 			utility::stringToIndexes(src, srcRow, srcCol);
 			utility::stringToIndexes(dst, dstRow, dstCol);
+
+			// updating king position
+			if (toupper(this->board[srcRow][srcCol]->getPieceType()) == 'K')
+			{
+				this->_players[currentPlayer]->_kingPosition = dst;
+			}
 
 			//destroying dest piece
 			removePiece(dstRow, dstCol);
