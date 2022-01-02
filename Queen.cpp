@@ -17,5 +17,11 @@ Queen::~Queen()
 // returns true if either rook or bishop can move to the destination
 bool Queen::pieceLegality(const string route) const
 {
-	return ((Rook*)this)->pieceLegality(route) || ((Bishop*)this)->pieceLegality(route);
+	Rook* theoreticalRook = new Rook(isupper(this->getPieceType()));
+	Bishop* theoreticalBishop = new Bishop(isupper(this->getPieceType()));
+	bool canMove = theoreticalRook->pieceLegality(route) || theoreticalBishop->pieceLegality(route);
+
+	delete theoreticalRook;
+	delete theoreticalBishop;
+	return canMove;
 }
