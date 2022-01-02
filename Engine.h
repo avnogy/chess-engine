@@ -12,7 +12,7 @@ public:
 	static bool boardLegality(Game& game, string location, bool isHorse);
 
 	//board validity functions
-	static bool isSrcPiece(Game& game, string location);
+	static bool canSrcMove(Game& game, string location);
 
 	static bool isDstOccupied(Game& game, string location);
 

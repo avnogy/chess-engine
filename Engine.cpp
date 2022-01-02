@@ -1,8 +1,8 @@
 #include "Engine.h"
 
 
-// returns true if source piece is valid
-bool Engine::isSrcPiece(Game &game,string location)
+// returns true if source point is a piece that can move in this turn
+bool Engine::canSrcMove(Game &game,string location)
 {
 	//seperating src and dst
 	string src = "", dst = "";
@@ -10,7 +10,9 @@ bool Engine::isSrcPiece(Game &game,string location)
 
 	//checking if piece at source is not empty
 	char pType = game.getPieceFromString(src)->getPieceType();
-	return pType != '#';
+	return pType != '#' &&
+			(isupper(pType) && game.currentPlayer == WHITE ||
+			islower(pType) && game.currentPlayer == BLACK);
 }
 
 // returns true if can go there
@@ -85,10 +87,10 @@ bool Engine::isCheckmate(Game& game, string location)
 
 bool Engine::boardLegality(Game& game, string location, bool isHorse)
 {
-	return(!isSrcPiece(game, location)
-		&& isDstOccupied(game, location)
-		&& !doesCauseDiscovery(game, location)
-		&& !isOutOfBounds(location)
-		&& !areIndexesEqual(location)
-		&& (isHorse || !isPathBlocked(game, location)));
+	return(!canSrcMove(game, location) //                   implemented
+		&& isDstOccupied(game, location) //                 
+		&& !doesCauseDiscovery(game, location) //           
+		&& !isOutOfBounds(location) //                      implemented
+		&& !areIndexesEqual(location) //                    
+		&& (isHorse || !isPathBlocked(game, location))); // 
 }
