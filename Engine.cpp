@@ -15,7 +15,7 @@ bool Engine::canSrcMove(Game &game,string location)
 			islower(pType) && game.currentPlayer == BLACK);
 }
 
-// returns true if can go there
+// returns true if src can go there
 bool Engine::isDstOccupied(Game& game, string location)
 {
 	//seperating src and dst locations
@@ -88,9 +88,9 @@ bool Engine::isCheckmate(Game& game, string location)
 bool Engine::boardLegality(Game& game, string location, bool isHorse)
 {
 	return(!canSrcMove(game, location) //                   implemented
-		&& isDstOccupied(game, location) //                 
-		&& !doesCauseDiscovery(game, location) //           
+		&& isDstOccupied(game, location) //                 implemented
+		&& !doesCauseDiscovery(game, location) //           TODO
 		&& !isOutOfBounds(location) //                      implemented
-		&& !areIndexesEqual(location) //                    
-		&& (isHorse || !isPathBlocked(game, location))); // 
+		&& !areIndexesEqual(location) //                    implemented
+		&& (isHorse || !isPathBlocked(game, location))); // TODO
 }
