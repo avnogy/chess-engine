@@ -85,12 +85,12 @@ bool Engine::isCheckmate(Game& game, string location)
 	return false;
 }
 
-bool Engine::boardLegality(Game& game, string location, bool isHorse)
+bool Engine::boardLegality(Game& game, string location)
 {
 	return(!canSrcMove(game, location) //                   implemented
 		&& isDstOccupied(game, location) //                 implemented
 		&& !doesCauseDiscovery(game, location) //           TODO
 		&& !isOutOfBounds(location) //                      implemented
 		&& !areIndexesEqual(location) //                    implemented
-		&& (isHorse || !isPathBlocked(game, location))); // TODO
+		&& (!isPathBlocked(game, location))); //            TODO
 }
