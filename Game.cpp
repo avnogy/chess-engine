@@ -176,10 +176,10 @@ void Game::move(string moveData)
 	if (this->getPieceFromString(src)->pieceLegality(dst))
 	{
 		//check piece type for blocking pieces check
-		bool isHorse = tolower(this->getPieceFromString(src)->getPieceType()) == 'h';
+		bool isKnight = tolower(this->getPieceFromString(src)->getPieceType()) == 'n';
 
 		//check board validity
-		if (Engine::boardLegality(*this, moveData, isHorse))
+		if (Engine::boardLegality(*this, moveData, isKnight))
 		{
 			//getting indexes
 			int srcRow = 0,srcCol = 0,dstRow = 0,dstCol = 0;
