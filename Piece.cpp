@@ -9,10 +9,12 @@ Piece::~Piece()
 {
 }
 
-bool Piece::boardLegality(const string input)
+bool Piece::doesMove(const string input) const
 {
-	//TODO: call all engine functions to check position 
-	return false;
+	string src = "", dst = "";
+	utility::separateMove(input, src, dst);
+
+	return src == dst;
 }
 
 //getters and setters

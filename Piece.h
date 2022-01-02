@@ -9,7 +9,7 @@ public:
 	~Piece();
 
 	//checks if the source and destination squares are equal.
-	bool boardLegality(const string input);
+	bool doesMove(const string input) const;
 
 	//checks if destination square is according to piece movement.
 	//this function is created for each piece type.

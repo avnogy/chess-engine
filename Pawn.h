@@ -5,6 +5,8 @@
 #define WHITE_INITIAL_ROW '2'
 #define BLACK_INITIAL_ROW '7'
 
+class Piece;
+
 class Pawn : public Piece
 {
 public:
