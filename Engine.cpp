@@ -75,8 +75,64 @@ bool Engine::areIndexesEqual(string location)
 
 bool Engine::isPathBlocked(Game& game, string location)
 {
-	//TODO: implement blocking
-	return false;
+	//seperating src and dst
+	string src = "", dst = "";
+	utility::separateMove(location, src, dst);
+
+	//getting indexes
+	int srcRow = 0, srcCol = 0, dstRow = 0, dstCol = 0;
+	utility::stringToIndexes(src, srcRow, srcCol);
+	utility::stringToIndexes(dst, dstRow, dstCol);
+
+	switch (tolower(game.getPieceFromString(src)->getPieceType()))
+	{
+	case 'n':	//is poni
+		return false; //ponies are unstoppable
+		break;
+	case 'k':	//is king
+		return false; //kings are slow af they dont even move
+		break;
+	case 'r':	//is rook
+		if (srcRow == dstRow)//if moving on x axis
+		{
+			bool flag = false;
+			for (int i = 0; i < abs(srcCol - dstCol) && !flag; i++)
+			{
+				if (srcCol > dstCol)
+				{
+					flag = flag || game.board[srcRow][srcCol - i]->getPieceType() == '#';
+				}
+				else
+				{
+					flag = flag || game.board[srcRow][srcCol + i]->getPieceType() == '#';
+				}
+			}
+			return flag;
+		}
+		else if (srcCol == dstCol)//if moving on y axis
+		{
+			bool flag = false;
+			for (int i = 0; i < abs(srcRow - dstRow); i++)
+			{
+				if (srcRow > dstRow)
+				{
+					flag = flag || game.board[dstRow - i][dstCol]->getPieceType() == '#';
+				}
+				else
+				{
+					flag = flag || game.board[srcRow + i][srcCol]->getPieceType() == '#';
+				}
+			}
+			return flag;
+		}
+		else
+		{
+			return true; //something very wrong happened..
+		}
+		break;
+	default:
+		return true;
+	}
 }
 
 bool Engine::isCheckmate(Game& game, string location)
