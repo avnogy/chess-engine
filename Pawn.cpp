@@ -32,11 +32,12 @@ bool Pawn::pieceLegality(const string route) const
 
 	isInInitialPosition = isupper(this->_pieceType) && source[ROW] == WHITE_INITIAL_ROW ||
 							islower(this->_pieceType) && source[ROW] == BLACK_INITIAL_ROW;
-	if (isInInitialPosition && destination[COL] == source[COL] && (int)destination[ROW] == ((int)source[ROW] + 2) * forwardDirection)
+	if (isInInitialPosition && destination[COL] == source[COL] && (int)destination[ROW] == (int)source[ROW] + 2 * forwardDirection)
 	{
 		return true; // pawn can move two steps forward if in initial position
 	}
-	else if (destination[COL] == source[COL] && (int)destination[ROW] == ((int)source[ROW] + 1) * forwardDirection)
+
+	if (destination[COL] == source[COL] && (int)destination[ROW] == (int)source[ROW] + 1 * forwardDirection)
 	{
 		return true; // pawn can move 1 step forward
 	}
