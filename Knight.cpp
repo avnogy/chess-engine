@@ -19,6 +19,6 @@ bool Knight::pieceLegality(const string route) const
 	string source;
 	utility::separateMove(route, source, destination);
 
-	return abs(destination[0] - source[0]) == 2 && abs(destination[1] - source[1]) == 1 ||
-		abs(destination[0] - source[0]) == 1 && abs(destination[1] - source[1]) == 2;
+	return (abs(destination[0] - source[0]) == 2 && abs(destination[1] - source[1]) == 1) ||
+		(abs(destination[0] - source[0]) == 1 && abs(destination[1] - source[1]) == 2);
 }
