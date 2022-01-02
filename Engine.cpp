@@ -112,11 +112,11 @@ bool Engine::isPathBlocked(Game& game, string location)
 		else if (srcCol == dstCol)//if moving on y axis
 		{
 			bool flag = false;
-			for (int i = 0; i < abs(srcRow - dstRow); i++)
+			for (int i = 1; i <= abs(srcRow - dstRow); i++)
 			{
 				if (srcRow > dstRow)
 				{
-					flag = flag || game.board[dstRow - i][dstCol]->getPieceType() != '#';
+					flag = flag || game.board[srcRow - i][srcCol]->getPieceType() != '#';
 				}
 				else
 				{
