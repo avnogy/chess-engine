@@ -1,8 +1,6 @@
 #pragma once
 #include "Piece.h"
 
-class Piece;
-
 class Bishop : public Piece
 {
 public:

@@ -2,8 +2,6 @@
 #include "Utility.h"
 #include "Piece.h"
 
-class Piece;
-
 class Knight : public Piece
 {
 public:
