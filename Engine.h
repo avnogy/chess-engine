@@ -35,4 +35,14 @@ public:
 
 	static bool isPathBlocked(Game& game, string location);
 
+	//piece specific path checking 
+	static bool knightPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol);
+	static bool bishopPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol);
+	static bool kingPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol);
+	static bool queenPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol);
+	static bool pawnPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol);
+	static bool rookPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol);
+	static bool EmptyPath();
+
+
 };

@@ -76,7 +76,7 @@ bool Engine::areIndexesEqual(string location)
 bool Engine::isPathBlocked(Game& game, string location)
 {
 	//seperating src and dst
-	bool flag = false;
+	bool result = false;
 	string src = "", dst = "";
 	utility::separateMove(location, src, dst);
 
@@ -85,101 +85,147 @@ bool Engine::isPathBlocked(Game& game, string location)
 	utility::stringToIndexes(src, srcRow, srcCol);
 	utility::stringToIndexes(dst, dstRow, dstCol);
 
+	//checking piece spesific path
 	switch (tolower(game.getPieceFromString(src)->getPieceType()))
 	{
 	case 'n':	//is poni
-		return false; //ponies are unstoppable
+		result = knightPath(game, srcRow, srcCol, dstRow, dstCol);
 		break;
 	case 'k':	//is king
-		return false; //kings are slow af they dont even move
+		result = kingPath(game, srcRow, srcCol, dstRow, dstCol);
 		break;
 	case 'r':	//is rook
-		flag = false;
-		if (srcRow == dstRow)//if moving on x axis
-		{
-			for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
-			{
-				if (srcCol > dstCol)
-				{
-					flag = flag || game.board[srcRow][srcCol - i]->getPieceType() != '#';
-				}
-				else
-				{
-					flag = flag || game.board[srcRow][srcCol + i]->getPieceType() != '#';
-				}
-			}
-		}
-		else if (srcCol == dstCol)//if moving on y axis
-		{
-			for (int i = 1; i <= (abs(srcRow - dstRow) - 1); i++)
-			{
-				if (srcRow > dstRow)
-				{
-					flag = flag || game.board[srcRow - i][srcCol]->getPieceType() != '#';
-				}
-				else
-				{
-					flag = flag || game.board[srcRow + i][srcCol]->getPieceType() != '#';
-				}
-			}
-		}
-		else
-		{
-			flag = true; //something very wrong happened..
-		}
-		return flag;
+		result = rookPath(game, srcRow, srcCol, dstRow, dstCol);
 		break;
 	case 'p':	//is pawn
-		if (dstCol - srcCol > 1)
-		{
-			return game.board[srcRow][srcCol + 1]->getPieceType() != '#';
-		}
-		else
-		{
-			return false;
-		}
+		result = pawnPath(game, srcRow, srcCol, dstRow, dstCol);
 		break;
-	case 'b':
-		flag = false;
-		if (srcCol < dstCol && srcRow > dstRow) // if moves right and up
-		{
-			for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
-			{
-				flag = flag || game.board[srcRow + i][srcCol + i]->getPieceType() != '#';
-			}
-		}
-		else if (srcCol < dstCol && srcRow < dstRow) //id moves right and down
-		{
-			for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
-			{
-				flag = flag || game.board[srcRow + i][srcCol - i]->getPieceType() != '#';
-			}
-		}
-		else if (srcCol > dstCol && srcRow > dstRow) //if moves left and down
-		{
-			for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
-			{
-				flag = flag || game.board[srcRow - i][srcCol - i]->getPieceType() != '#';
-			}
-		}
-		else if (srcCol > dstCol && srcRow < dstRow) //if moves left and up
-		{
-			for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
-			{
-				flag = flag || game.board[srcRow - i][srcCol + i]->getPieceType() != '#';
-			}
-		}
-		else
-		{
-			flag = true; //something very wrong happened..
-		}
-		return flag;
+	case 'b': //is bish(op)
+		result = bishopPath(game, srcRow, srcCol, dstRow, dstCol);
 		break;
-
+	case 'q': //is queen
+		result = queenPath(game, srcRow, srcCol, dstRow, dstCol);
+		break;
+	case '#': //is empty
+		result = EmptyPath();
+		break;
 	default:
-		return true;
+		result = true;
 	}
+	return result;
 }
+
+bool Engine::knightPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol)
+{
+	return false; //ponies are unstoppable
+}
+
+bool Engine::kingPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol)
+{
+	return false; //kings are slow af they dont even move
+}
+
+bool Engine::rookPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol)
+{
+	bool flag = false;
+	if (srcRow == dstRow)//if moving on x axis
+	{
+		for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
+		{
+			if (srcCol > dstCol)
+			{
+				flag = flag || game.board[srcRow][srcCol - i]->getPieceType() != '#';
+			}
+			else
+			{
+				flag = flag || game.board[srcRow][srcCol + i]->getPieceType() != '#';
+			}
+		}
+	}
+	else if (srcCol == dstCol)//if moving on y axis
+	{
+		for (int i = 1; i <= (abs(srcRow - dstRow) - 1); i++)
+		{
+			if (srcRow > dstRow)
+			{
+				flag = flag || game.board[srcRow - i][srcCol]->getPieceType() != '#';
+			}
+			else
+			{
+				flag = flag || game.board[srcRow + i][srcCol]->getPieceType() != '#';
+			}
+		}
+	}
+	else
+	{
+		flag = true; //something very wrong happened..
+	}
+	return flag;
+}
+
+bool Engine::pawnPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol)
+{
+	return (dstCol - srcCol > 1) && game.board[srcRow][srcCol + 1]->getPieceType() != '#';
+}
+
+bool Engine::bishopPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol)
+{
+	bool flag = 0;
+	if (srcCol < dstCol && srcRow > dstRow) // if moves right and up
+	{
+		for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
+		{
+			flag = flag || game.board[srcRow + i][srcCol + i]->getPieceType() != '#';
+		}
+	}
+	else if (srcCol < dstCol && srcRow < dstRow) //id moves right and down
+	{
+		for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
+		{
+			flag = flag || game.board[srcRow + i][srcCol - i]->getPieceType() != '#';
+		}
+	}
+	else if (srcCol > dstCol && srcRow > dstRow) //if moves left and down
+	{
+		for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
+		{
+			flag = flag || game.board[srcRow - i][srcCol - i]->getPieceType() != '#';
+		}
+	}
+	else if (srcCol > dstCol && srcRow < dstRow) //if moves left and up
+	{
+		for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
+		{
+			flag = flag || game.board[srcRow - i][srcCol + i]->getPieceType() != '#';
+		}
+	}
+	else
+	{
+		flag = true; //something very wrong happened..
+	}
+	return flag;
+}
+
+bool Engine::queenPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol)
+{
+	//TODO: this.
+	return false;
+}
+
+bool Engine::EmptyPath()
+{
+	return false; //uhh why.
+}
+
+
+
+
+
+
+
+
+
+
 
 bool Engine::isCheckmate(Game& game, string location)
 {
