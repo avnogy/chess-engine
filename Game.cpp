@@ -1,6 +1,6 @@
 #include "Game.h"
 
-string Game::INITIAL_BOARD = "rnbqkbnrpppppppp################################PPPPPPPPRNBQKBNR0";
+string Game::INITIAL_BOARD = "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr0";
 
 // switches the current player to the other 
 void Game::switchPlayer()

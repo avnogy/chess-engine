@@ -31,16 +31,16 @@ int main()
 	return 0;
 }
 #else
-void main()
+int main()
 {
 	srand(time_t(NULL));
 
 	
-	Pipe p;
-	bool isConnect = p.connect();
+	Pipe pipe;
+	bool isConnected = pipe.connect();
 	
 	string ans;
-	while (!isConnect)
+	while (!isConnected)
 	{
 		cout << "cant connect to graphics" << endl;
 		cout << "Do you try to connect again or exit? (0-try again, 1-exit)" << endl;
@@ -50,33 +50,33 @@ void main()
 		{
 			cout << "trying connect again.." << endl;
 			Sleep(5000);
-			isConnect = p.connect();
+			isConnected = pipe.connect();
 		}
 		else 
 		{
-			p.close();
-			return;
+			pipe.close();
+			return -1;
 		}
 	}
 	
 
 	char msgToGraphics[1024];
-	// msgToGraphics should contain the board string accord the protocol
+	// msgToGraphics should contain the board string according to the protocol
 	// YOUR CODE
 
-	strcpy_s(msgToGraphics, "rnbqkbnrpppppppp################################PPPPPPPPRNBQKBNR0"); // just example...
+	strcpy_s(msgToGraphics, Game::INITIAL_BOARD.c_str()); // just example...
 	
-	p.sendMessageToGraphics(msgToGraphics);   // send the board string
+	pipe.sendMessageToGraphics(msgToGraphics);   // send the board string
 
 	// get message from graphics
-	string msgFromGraphics = p.getMessageFromGraphics();
+	string msgFromGraphics = pipe.getMessageFromGraphics();
 
 	while (msgFromGraphics != "quit")
 	{
-		// should handle the string the sent from graphics
+		// should handle the string sent from graphics
 		// according the protocol. Ex: e2e4           (move e2 to e4)
 		
-		// YOUR CODE
+		// TODO: use game::move
 		strcpy_s(msgToGraphics, "YOUR CODE"); // msgToGraphics should contain the result of the operation
 
 		/******* JUST FOR EREZ DEBUGGING ******/
@@ -87,12 +87,13 @@ void main()
 
 
 		// return result to graphics		
-		p.sendMessageToGraphics(msgToGraphics);   
+		pipe.sendMessageToGraphics(msgToGraphics);
 
 		// get message from graphics
-		msgFromGraphics = p.getMessageFromGraphics();
+		msgFromGraphics = pipe.getMessageFromGraphics();
 	}
 
-	p.close();
+	pipe.close();
+	return 0;
 }
 #endif 
