@@ -187,13 +187,17 @@ bool Engine::isCheckmate(Game& game, string location)
 	return false;
 }
 
-bool Engine::boardLegality(Game& game, string location)
+int Engine::boardLegality(Game& game, string location)
 {
-	return canSrcMove(game, location) //                   implemented
-		&& !isDstOccupied(game, location) //                 implemented
-		//&& !doesCauseDiscovery(game, location) //           TODO
-		&& !isOutOfBounds(location) //                      implemented
-		&& !areIndexesEqual(location) //                    implemented
-		&& !isPathBlocked(game, location) //            TODO
-		;
+	int result = VALID_MOVE;
+	//TODO: implement check check :)
+	result = (!result && !canSrcMove(game, location)) ? INVALID_MOVE_NO_SRC : result;
+	result = (!result && isDstOccupied(game, location)) ? INVALID_MOVE_DST_OCCUPIED : result;
+	//result = (!result && doesCauseDiscovery(game, location)) ? INVALID_MOVE_DISCOVERY : result;
+	result = (!result && isOutOfBounds(location)) ? INVALID_INDEXES : result;
+	result = (!result && isPathBlocked(game, location)) ? INVALID_PIECE_MOVE : result;
+	result = (!result && areIndexesEqual(location)) ? INVALID_INDEXES_ARE_EQUAL : result;
+	result = (!result && isCheckmate(game, location)) ? CHECKMATE : result;
+
+	return result;
 }
