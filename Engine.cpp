@@ -96,7 +96,7 @@ bool Engine::isPathBlocked(Game& game, string location)
 		if (srcRow == dstRow)//if moving on x axis
 		{
 			bool flag = false;
-			for (int i = 1; i <= abs(srcCol - dstCol) && !flag; i++)
+			for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
 			{
 				if (srcCol > dstCol)
 				{
@@ -112,7 +112,7 @@ bool Engine::isPathBlocked(Game& game, string location)
 		else if (srcCol == dstCol)//if moving on y axis
 		{
 			bool flag = false;
-			for (int i = 1; i <= abs(srcRow - dstRow); i++)
+			for (int i = 1; i <= (abs(srcRow - dstRow) - 1); i++)
 			{
 				if (srcRow > dstRow)
 				{
@@ -128,6 +128,16 @@ bool Engine::isPathBlocked(Game& game, string location)
 		else
 		{
 			return true; //something very wrong happened..
+		}
+		break;
+	case 'p':	//is pawn
+		if (dstCol - srcCol > 1)
+		{
+			return game.board[srcRow][srcCol + 1]->getPieceType() != '#';
+		}
+		else
+		{
+			return false;
 		}
 		break;
 	default:
