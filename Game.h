@@ -26,6 +26,7 @@ class Game
 private:
 	// fields
 	Player* _players[2];
+	char _outputCode[2];
 	// helper methods
 	void switchPlayer();
 	void clearBoard();
@@ -45,5 +46,5 @@ public:
 	Piece* getPieceFromString(string location);
 	void copyBoardFromString(string boardString);
 	void printBoard();
-	void move(string moveData, char* codeDestination);
+	char* move(string moveData);
 };

@@ -8,6 +8,8 @@ int main()
 	srand(time_t(NULL));
 
 	Game game;
+	string board = "rnbqkbnr################################################RNBQKBNR0";
+	game.copyBoardFromString(board);
 	Pipe pipe;
 	bool isConnected = pipe.connect();
 	
@@ -36,8 +38,9 @@ int main()
 	// msgToGraphics should contain the board string according to the protocol
 	// YOUR CODE
 
-	strcpy_s(msgToGraphics, Game::INITIAL_BOARD.c_str()); // just example...
-	
+	//strcpy_s(msgToGraphics, Game::INITIAL_BOARD.c_str()); // just example...
+	strcpy_s(msgToGraphics, board.c_str());
+
 	pipe.sendMessageToGraphics(msgToGraphics);   // send the board string
 
 	// get message from graphics
@@ -48,14 +51,14 @@ int main()
 		// should handle the string sent from graphics
 		// according the protocol. Ex: e2e4           (move e2 to e4)
 		
-		game.move(msgFromGraphics, msgToGraphics);
-		//strcpy_s(msgToGraphics, "YOUR CODE"); // msgToGraphics should contain the result of the operation
+		strcpy_s(msgToGraphics, game.move(msgFromGraphics)); // msgToGraphics should contain the result of the operation
 
-		/******* JUST FOR EREZ DEBUGGING ******/
+
+		/******* JUST FOR EREZ DEBUGGING *****
 		int r = rand() % 10; // just for debugging......
 		msgToGraphics[0] = (char)(1 + '0');
 		msgToGraphics[1] = 0;
-		/******* JUST FOR EREZ DEBUGGING ******/
+		****** JUST FOR EREZ DEBUGGING ******/
 
 
 		// return result to graphics		

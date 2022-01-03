@@ -123,6 +123,8 @@ Game::Game()
 	this->_players[WHITE] = new Player(WHITE);
 	this->_players[BLACK] = new Player(BLACK);
 
+	this->_outputCode[0] = 0;
+	this->_outputCode[1] = 0;
 	// initializing board as the standard chess board
 	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
 	{
@@ -157,17 +159,18 @@ void Game::printBoard()
 	}
 }
 
-void Game::move(string moveData, char* codeDestination)
+char* Game::move(string moveData)
 {
 	//seperating src and dst
-	string src = "", dst = "", output = "";
+	string src = "", dst = "";
 	utility::separateMove(moveData, src, dst);
 
 	//check piece validity
 	if (this->getPieceFromString(src)->pieceLegality(moveData))
 	{
 		//check board validity
-		if (Engine::boardLegality(*this, moveData))
+		this->_outputCode[0] = Engine::boardLegality(*this, moveData) + '0';
+		if (_outputCode[0] == 0 || _outputCode[0] == 1 || _outputCode[0] == 8)
 		{
 			// executing move
 			
@@ -191,22 +194,14 @@ void Game::move(string moveData, char* codeDestination)
 
 			//end of turn
 			switchPlayer();
-
-			output = "0";
-			
-			// TODO: detect check and return "1" if check
-			// TODO: detect checkmate and return "8" if checkmate
-		}
-		else
-		{
-			//TODO: send error data to pipe
 		}
 	}
 	else
 	{
-		output = "6";
+		this->_outputCode[0] = '6';
 	}
-	strcpy_s(codeDestination, output.length() + 1, output.c_str());
+	
+	return this->_outputCode;
 }
 
 
