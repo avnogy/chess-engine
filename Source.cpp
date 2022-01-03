@@ -14,6 +14,7 @@ using std::cout;
 using std::endl;
 using std::string;
 
+#if 0
 int main()
 {
 	Game game;
@@ -29,8 +30,7 @@ int main()
 	}
 	return 0;
 }
-
-#if 0
+#else
 void main()
 {
 	srand(time_t(NULL));
@@ -64,7 +64,7 @@ void main()
 	// msgToGraphics should contain the board string accord the protocol
 	// YOUR CODE
 
-	strcpy_s(msgToGraphics, "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1"); // just example...
+	strcpy_s(msgToGraphics, "rnbqkbnrpppppppp################################PPPPPPPPRNBQKBNR0"); // just example...
 	
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
 
