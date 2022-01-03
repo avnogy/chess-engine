@@ -8,7 +8,9 @@ int main()
 	srand(time_t(NULL));
 
 	Game game;
-	string board = "rnbqkbnr################################################RNBQKBNR0";
+	//complete board: "rnbqkbnrpppppppp################################PPPPPPPPRNBQKBNR0"
+	//no pawns: "rnbqkbnr################################################RNBQKBNR0"
+	string board = "rnbqkbnrpppppppp################################PPPPPPPPRNBQKBNR0";
 	game.copyBoardFromString(board);
 	Pipe pipe;
 	bool isConnected = pipe.connect();

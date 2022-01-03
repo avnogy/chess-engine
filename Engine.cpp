@@ -165,18 +165,18 @@ bool Engine::pawnPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol
 bool Engine::bishopPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol)
 {
 	bool flag = false;
-	if (srcCol < dstCol && srcRow > dstRow) // if moves right and up
-	{
-		for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
-		{
-			flag = flag || game.board[srcRow + i][srcCol + i]->getPieceType() != '#';
-		}
-	}
-	else if (srcCol < dstCol && srcRow < dstRow) //id moves right and down
+	if (srcCol < dstCol && srcRow > dstRow) // if moves right and down
 	{
 		for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
 		{
 			flag = flag || game.board[srcRow + i][srcCol - i]->getPieceType() != '#';
+		}
+	}
+	else if (srcCol < dstCol && srcRow < dstRow) //id moves right and up
+	{
+		for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
+		{
+			flag = flag || game.board[srcRow + i][srcCol + i]->getPieceType() != '#';
 		}
 	}
 	else if (srcCol > dstCol && srcRow > dstRow) //if moves left and down
@@ -190,7 +190,7 @@ bool Engine::bishopPath(Game& game, int srcRow, int srcCol, int dstRow, int dstC
 	{
 		for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
 		{
-			flag = flag || game.board[srcRow - i][srcCol + i]->getPieceType() != '#';
+			flag = flag || game.board[srcRow + i][srcCol - i]->getPieceType() != '#';
 		}
 	}
 	return flag;
