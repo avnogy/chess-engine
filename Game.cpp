@@ -160,7 +160,7 @@ void Game::printBoard()
 void Game::move(string moveData, char* codeDestination)
 {
 	//seperating src and dst
-	string src = "", dst = "";
+	string src = "", dst = "", output = "";
 	utility::separateMove(moveData, src, dst);
 
 	//check piece validity
@@ -192,8 +192,7 @@ void Game::move(string moveData, char* codeDestination)
 			//end of turn
 			switchPlayer();
 
-			//TODO: send data to pipe
-
+			output = "0";
 		}
 		else
 		{
@@ -202,8 +201,9 @@ void Game::move(string moveData, char* codeDestination)
 	}
 	else
 	{
-		//TODO: send error data to pipe
+		output = "6";
 	}
+	strcpy_s(codeDestination, output.length() + 1, output.c_str());
 }
 
 
