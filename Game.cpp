@@ -193,6 +193,9 @@ void Game::move(string moveData, char* codeDestination)
 			switchPlayer();
 
 			output = "0";
+			
+			// TODO: detect check and return "1" if check
+			// TODO: detect checkmate and return "8" if checkmate
 		}
 		else
 		{

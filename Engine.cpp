@@ -76,6 +76,7 @@ bool Engine::areIndexesEqual(string location)
 bool Engine::isPathBlocked(Game& game, string location)
 {
 	//seperating src and dst
+	bool flag = false;
 	string src = "", dst = "";
 	utility::separateMove(location, src, dst);
 
@@ -93,7 +94,7 @@ bool Engine::isPathBlocked(Game& game, string location)
 		return false; //kings are slow af they dont even move
 		break;
 	case 'r':	//is rook
-		bool flag = false;
+		flag = false;
 		if (srcRow == dstRow)//if moving on x axis
 		{
 			for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
@@ -139,7 +140,7 @@ bool Engine::isPathBlocked(Game& game, string location)
 		}
 		break;
 	case 'b':
-		bool flag = false;
+		flag = false;
 		if (srcCol < dstCol && srcRow > dstRow) // if moves right and up
 		{
 			for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
