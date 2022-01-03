@@ -156,10 +156,6 @@ bool Engine::rookPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol
 			}
 		}
 	}
-	else
-	{
-		flag = true; //something very wrong happened..
-	}
 	return flag;
 }
 
@@ -170,7 +166,7 @@ bool Engine::pawnPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol
 
 bool Engine::bishopPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol)
 {
-	bool flag = 0;
+	bool flag = false;
 	if (srcCol < dstCol && srcRow > dstRow) // if moves right and up
 	{
 		for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
@@ -199,32 +195,18 @@ bool Engine::bishopPath(Game& game, int srcRow, int srcCol, int dstRow, int dstC
 			flag = flag || game.board[srcRow - i][srcCol + i]->getPieceType() != '#';
 		}
 	}
-	else
-	{
-		flag = true; //something very wrong happened..
-	}
 	return flag;
 }
 
 bool Engine::queenPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol)
 {
-	//TODO: this.
-	return false;
+	return bishopPath(game, srcRow, srcCol, dstRow, dstCol) || rookPath(game, srcRow, srcCol, dstRow, dstCol);
 }
 
 bool Engine::EmptyPath()
 {
 	return false; //uhh why.
 }
-
-
-
-
-
-
-
-
-
 
 
 bool Engine::isCheckmate(Game& game, string location)
