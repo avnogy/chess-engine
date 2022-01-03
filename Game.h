@@ -45,5 +45,5 @@ public:
 	Piece* getPieceFromString(string location);
 	void copyBoardFromString(string boardString);
 	void printBoard();
-	void move(string moveData);
+	void move(string moveData, char* codeDestination);
 };

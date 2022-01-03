@@ -157,7 +157,7 @@ void Game::printBoard()
 	}
 }
 
-void Game::move(string moveData)
+void Game::move(string moveData, char* codeDestination)
 {
 	//seperating src and dst
 	string src = "", dst = "";
