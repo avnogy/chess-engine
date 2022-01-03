@@ -9,10 +9,8 @@ bool Engine::canSrcMove(Game &game,string location)
 	utility::separateMove(location, src, dst);
 
 	//checking if piece at source is not empty
-	char pType = game.getPieceFromString(src)->getPieceType();
-	return pType != '#' &&
-			(isupper(pType) && game.currentPlayer == WHITE ||
-			islower(pType) && game.currentPlayer == BLACK);
+	Piece* piece = game.getPieceFromString(src);
+	return (piece->getPieceType() != '#' && piece->getPieceColor() == game.currentPlayer);
 }
 
 // returns true if src can go there
