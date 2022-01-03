@@ -1,36 +1,8 @@
-/*
-This file servers as an example of how to use Pipe.h file.
-It is recommended to use the following code in your project, 
-in order to read and write information from and to the Backend
-*/
-
 #include "Pipe.h"
 #include <iostream>
 #include <thread>
 #include "Game.h"
 
-using std::cin;
-using std::cout;
-using std::endl;
-using std::string;
-
-#if 0
-int main()
-{
-	Game game;
-	string myBoard = "####k########################kR###r######r##################k###";
-	string movementInput = "";
-	game.copyBoardFromString(myBoard);
-
-	while (true) // TODO: detect checkmate
-	{
-		game.printBoard();
-		cin >> movementInput;
-		game.move(movementInput);
-	}
-	return 0;
-}
-#else
 int main()
 {
 	srand(time_t(NULL));
@@ -96,4 +68,3 @@ int main()
 	pipe.close();
 	return 0;
 }
-#endif 
