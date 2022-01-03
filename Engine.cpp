@@ -93,9 +93,9 @@ bool Engine::isPathBlocked(Game& game, string location)
 		return false; //kings are slow af they dont even move
 		break;
 	case 'r':	//is rook
+		bool flag = false;
 		if (srcRow == dstRow)//if moving on x axis
 		{
-			bool flag = false;
 			for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
 			{
 				if (srcCol > dstCol)
@@ -107,11 +107,9 @@ bool Engine::isPathBlocked(Game& game, string location)
 					flag = flag || game.board[srcRow][srcCol + i]->getPieceType() != '#';
 				}
 			}
-			return flag;
 		}
 		else if (srcCol == dstCol)//if moving on y axis
 		{
-			bool flag = false;
 			for (int i = 1; i <= (abs(srcRow - dstRow) - 1); i++)
 			{
 				if (srcRow > dstRow)
@@ -123,12 +121,12 @@ bool Engine::isPathBlocked(Game& game, string location)
 					flag = flag || game.board[srcRow + i][srcCol]->getPieceType() != '#';
 				}
 			}
-			return flag;
 		}
 		else
 		{
-			return true; //something very wrong happened..
+			flag = true; //something very wrong happened..
 		}
+		return flag;
 		break;
 	case 'p':	//is pawn
 		if (dstCol - srcCol > 1)
@@ -140,6 +138,43 @@ bool Engine::isPathBlocked(Game& game, string location)
 			return false;
 		}
 		break;
+	case 'b':
+		bool flag = false;
+		if (srcCol < dstCol && srcRow > dstRow) // if moves right and up
+		{
+			for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
+			{
+				flag = flag || game.board[srcRow + i][srcCol + i]->getPieceType() != '#';
+			}
+		}
+		else if (srcCol < dstCol && srcRow < dstRow) //id moves right and down
+		{
+			for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
+			{
+				flag = flag || game.board[srcRow + i][srcCol - i]->getPieceType() != '#';
+			}
+		}
+		else if (srcCol > dstCol && srcRow > dstRow) //if moves left and down
+		{
+			for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
+			{
+				flag = flag || game.board[srcRow - i][srcCol - i]->getPieceType() != '#';
+			}
+		}
+		else if (srcCol > dstCol && srcRow < dstRow) //if moves left and up
+		{
+			for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
+			{
+				flag = flag || game.board[srcRow - i][srcCol + i]->getPieceType() != '#';
+			}
+		}
+		else
+		{
+			flag = true; //something very wrong happened..
+		}
+		return flag;
+		break;
+
 	default:
 		return true;
 	}
