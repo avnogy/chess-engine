@@ -2,8 +2,8 @@
 #include <iostream>
 #include <string>
 #include <cctype>
-#define BLACK 0
-#define WHITE 1
+#define BLACK 1
+#define WHITE 0
 #define BOARD_SIDE_LENGTH 8
 using std::string;
 using std::cout;
