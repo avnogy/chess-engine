@@ -10,7 +10,7 @@ Empty::~Empty()
 }
 
 // an empty piece cannot move anywhere
-bool Empty::pieceLegality(const string route) const
+bool Empty::pieceLegality(const string route, Piece*** board) const
 {
 	return false;
 }

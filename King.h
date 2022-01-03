@@ -9,5 +9,5 @@ private:
 public:
     King(bool isWhite);
     ~King();
-    virtual bool pieceLegality(const string route) const override;
+    virtual bool pieceLegality(const string route, Piece*** board) const override;
 };

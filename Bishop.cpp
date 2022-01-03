@@ -13,7 +13,7 @@ Bishop::~Bishop()
 }
 
 // returns true if destination is located diagonally from the source
-bool Bishop::pieceLegality(const string route) const
+bool Bishop::pieceLegality(const string route, Piece*** board) const
 {
 	string destination;
 	string source;

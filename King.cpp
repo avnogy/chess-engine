@@ -14,7 +14,7 @@ King::~King()
 }
 
 // returns true if position is next to the current position
-bool King::pieceLegality(const string route) const
+bool King::pieceLegality(const string route, Piece*** board) const
 {
 	string destination;
 	string source;

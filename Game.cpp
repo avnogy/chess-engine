@@ -125,9 +125,16 @@ Game::Game()
 
 	this->_outputCode[0] = 0;
 	this->_outputCode[1] = 0;
+
+	this->board = new Piece**[BOARD_SIDE_LENGTH];
+	if (this->board == nullptr)
+	{
+		throw "memory allocation failure"; // pipi in our pampers
+	}
 	// initializing board as the standard chess board
 	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
 	{
+		this->board[row] = new Piece*[BOARD_SIDE_LENGTH];
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
 		{
 			this->board[row][col] = nullptr;
@@ -144,6 +151,11 @@ Game::~Game()
 
 	// deleting every piece on the board
 	clearBoard();
+	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
+	{
+		delete[] this->board[row];
+	}
+	delete[] this->board;
 }
 
 // prints the board to std::cout
@@ -166,11 +178,11 @@ char* Game::move(string moveData)
 	utility::separateMove(moveData, src, dst);
 
 	//check piece validity
-	if (this->getPieceFromString(src)->pieceLegality(moveData))
+	if (this->getPieceFromString(src)->pieceLegality(moveData, (this->board)))
 	{
 		//check board validity
 		this->_outputCode[0] = Engine::boardLegality(*this, moveData) + '0';
-		if (_outputCode[0] == 0 || _outputCode[0] == 1 || _outputCode[0] == 8)
+		if (_outputCode[0] == '0' || _outputCode[0] == '1' || _outputCode[0] == '8')
 		{
 			// executing move
 			

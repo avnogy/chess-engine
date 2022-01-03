@@ -34,7 +34,7 @@ private:
 public:
 	// fields
 	bool currentPlayer;
-	Piece* board[BOARD_SIDE_LENGTH][BOARD_SIDE_LENGTH];
+	Piece*** board;
 	// static variable
 	static string INITIAL_BOARD;
 
