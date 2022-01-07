@@ -22,8 +22,11 @@ bool Pawn::pieceLegality(const string route, Piece*** board) const
 	string destination = "";
 	string source = "";
 	int forwardDirection = 1;
+	int destRow = 0;
+	int destCol = 0;
 	bool isInInitialPosition = false;
 	utility::separateMove(route, source, destination);
+	utility::stringToIndexes(destination, destRow, destCol);
 
 	if (islower(this->_pieceType)) // if pawn is black
 	{
@@ -42,7 +45,13 @@ bool Pawn::pieceLegality(const string route, Piece*** board) const
 		return true; // pawn can move 1 step forward
 	}
 
-	// TODO: add capturing
+	if (abs(destination[COL] - source[COL]) == 1 // goes 1 space to either side
+		&& (int)destination[ROW] == (int)source[ROW] + 1 * forwardDirection // goes 1 forward
+		&& board[destRow][destCol]->getPieceType() != '#' // lands on a piece
+		&& isupper(board[destRow][destCol]->getPieceType()) != isupper(this->getPieceType())) // does not land of friendly piece
+	{
+		return true;
+	}
 	// TODO: google en passant
 	// TODO: say "holy hell" and add en passant
 
