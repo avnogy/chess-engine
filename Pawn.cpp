@@ -10,6 +10,7 @@ Pawn::Pawn(bool isWhite) : Piece('p')
 	{
 		this->_pieceType = toupper(this->_pieceType);
 	}
+	this->_enPassantFlag = false;
 }
 
 Pawn::~Pawn()
@@ -37,6 +38,23 @@ bool Pawn::pieceLegality(const string route, Piece*** board) const
 							islower(this->_pieceType) && source[ROW] == BLACK_INITIAL_ROW;
 	if (isInInitialPosition && destination[COL] == source[COL] && (int)destination[ROW] == (int)source[ROW] + 2 * forwardDirection)
 	{
+		int potentialPawnRow = 0, potentialPawnCol = 0;
+		string potentialPawnLocation = destination;
+
+		potentialPawnLocation[COL]++;
+		if (!Engine::isOutOfBounds(potentialPawnLocation)
+			&& tolower(board[destRow][destCol + 1]->getPieceType()) == 'p')
+		{
+			((Pawn*)board[destRow][destCol + 1])->setEnPassantFlag(true);
+		}
+		potentialPawnLocation[COL] -= 2;
+		if (!Engine::isOutOfBounds(potentialPawnLocation)
+			&& tolower(board[destRow][destCol - 1]->getPieceType()) == 'p')
+		{
+			((Pawn*)board[destRow][destCol - 1])->setEnPassantFlag(true);
+		}
+
+
 		return true; // pawn can move two steps forward if in initial position
 	}
 
@@ -56,4 +74,14 @@ bool Pawn::pieceLegality(const string route, Piece*** board) const
 	// TODO: say "holy hell" and add en passant
 
 	return false;
+}
+
+bool Pawn::canTakeEnPassant() const
+{
+	return this->_enPassantFlag;
+}
+
+void Pawn::setEnPassantFlag(bool newState)
+{
+	this->_enPassantFlag = newState;
 }
