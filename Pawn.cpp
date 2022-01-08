@@ -34,13 +34,13 @@ bool Pawn::pieceLegality(const string route, Piece*** board)
 	utility::stringToIndexes(destination, destRow, destCol);
 	utility::stringToIndexes(source, srcRow, srcCol);
 
-	if (islower(this->_pieceType)) // if pawn is black
+	if (isupper(this->_pieceType)) // if pawn is black
 	{
-		forwardDirection = -1; // forward direction is flipper
+		forwardDirection = -1; // forward direction is flipped
 	}
 
-	isInInitialPosition = isupper(this->_pieceType) && source[ROW] == WHITE_INITIAL_ROW ||
-							islower(this->_pieceType) && source[ROW] == BLACK_INITIAL_ROW;
+	isInInitialPosition = islower(this->_pieceType) && source[ROW] == WHITE_INITIAL_ROW ||
+							isupper(this->_pieceType) && source[ROW] == BLACK_INITIAL_ROW;
 	if (isInInitialPosition && destination[COL] == source[COL] && (int)destination[ROW] == (int)source[ROW] + 2 * forwardDirection)
 	{
 		setEnPassantFlag(true);
