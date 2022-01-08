@@ -14,7 +14,7 @@ Rook::~Rook()
 }
 
 // returns true if destination is on the same row or on the same column as the source
-bool Rook::pieceLegality(const string route, Piece*** board) const
+bool Rook::pieceLegality(const string route, Piece*** board)
 {
 	string destination;
 	string source;

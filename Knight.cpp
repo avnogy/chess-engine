@@ -13,7 +13,7 @@ Knight::~Knight()
 }
 
 // im really not sure how the horsey moves tbh
-bool Knight::pieceLegality(const string route, Piece*** board) const
+bool Knight::pieceLegality(const string route, Piece*** board)
 {
 	string destination;
 	string source;
