@@ -20,5 +20,20 @@ bool Rook::pieceLegality(const string route, Piece*** board)
 	string source;
 	utility::separateMove(route, source, destination);
 
-	return destination[0] == source[0] || destination[1] == source[1];
+	if (destination[0] == source[0] || destination[1] == source[1])
+	{
+		setCastleFlag(false);
+		return true;
+	}
+	return false;
+}
+
+bool Rook::canCastle() const
+{
+	return this->_canCastle;
+}
+
+void Rook::setCastleFlag(const bool newState)
+{
+	this->_canCastle = newState;
 }
