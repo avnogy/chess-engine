@@ -10,7 +10,7 @@ Pawn::Pawn(bool isWhite) : Piece('p')
 	{
 		this->_pieceType = toupper(this->_pieceType);
 	}
-	this->_enPassantFlag = false;
+	this->_canTakeEnPassant = false;
 }
 
 Pawn::~Pawn()
@@ -45,13 +45,13 @@ bool Pawn::pieceLegality(const string route, Piece*** board) const
 		if (!Engine::isOutOfBounds(potentialPawnLocation)
 			&& tolower(board[destRow][destCol + 1]->getPieceType()) == 'p')
 		{
-			((Pawn*)board[destRow][destCol + 1])->setEnPassantFlag(true);
+			((Pawn*)board[destRow][destCol + 1])->setCanTakeEnPassant(true);
 		}
 		potentialPawnLocation[COL] -= 2;
 		if (!Engine::isOutOfBounds(potentialPawnLocation)
 			&& tolower(board[destRow][destCol - 1]->getPieceType()) == 'p')
 		{
-			((Pawn*)board[destRow][destCol - 1])->setEnPassantFlag(true);
+			((Pawn*)board[destRow][destCol - 1])->setCanTakeEnPassant(true);
 		}
 
 
@@ -78,10 +78,20 @@ bool Pawn::pieceLegality(const string route, Piece*** board) const
 
 bool Pawn::canTakeEnPassant() const
 {
-	return this->_enPassantFlag;
+	return this->_canTakeEnPassant;
 }
 
-void Pawn::setEnPassantFlag(bool newState)
+void Pawn::setCanTakeEnPassant(bool newState)
 {
-	this->_enPassantFlag = newState;
+	this->_canTakeEnPassant = newState;
+}
+
+bool Pawn::canBeTakenEnPassant() const
+{
+	return this->_canBeTakenEnPassant;
+}
+
+void Pawn::setCanBeTakenEnPassant(bool newState)
+{
+	this->_canBeTakenEnPassant = newState;
 }

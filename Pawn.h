@@ -9,12 +9,15 @@
 class Pawn : public Piece
 {
 private:
-    bool _enPassantFlag; // google en passant
+    bool _canTakeEnPassant; // google en passant
+    bool _canBeTakenEnPassant; // holy hell
 public:
     Pawn(bool isWhite);
     ~Pawn();
     virtual bool pieceLegality(const string route, Piece*** board) const override;
     
-    bool canTakeEnPassant() const; // holy hell
-    void setEnPassantFlag(bool newState);
+    bool canTakeEnPassant() const;
+    void setCanTakeEnPassant(bool newState);
+    bool canBeTakenEnPassant() const;
+    void setCanBeTakenEnPassant(bool newState);
 };
