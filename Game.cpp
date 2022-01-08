@@ -204,6 +204,20 @@ char* Game::move(string moveData)
 			//putting nothing in src location
 			this->board[srcRow][srcCol] = new Empty();
 
+			// clearing en passant flags
+			int rowToClearEnPassantFlags = BLACK_INITIAL_ROW - '0' - 2;
+			if (currentPlayer == WHITE)
+			{
+				rowToClearEnPassantFlags = WHITE_INITIAL_ROW - '0' + 2;
+			}
+			for (int i = 0; i < BOARD_SIDE_LENGTH; i++)
+			{
+				if (tolower(board[rowToClearEnPassantFlags][i]->getPieceType()) == 'p')
+				{
+					((Pawn*)board[rowToClearEnPassantFlags][i])->setEnPassantFlag(false);
+				}
+			}
+
 			//end of turn
 			switchPlayer();
 		}
