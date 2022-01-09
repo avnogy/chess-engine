@@ -62,6 +62,7 @@ bool Pawn::pieceLegality(const string route, Piece*** board)
 	
 	if (abs(destination[COL] - source[COL]) == 1 // goes 1 space to the side
 		&& (int)destination[ROW] == (int)source[ROW] + 1 * forwardDirection // goes 1 space forward
+		&& tolower(board[srcRow][destCol]->getPieceType()) == 'p'
 		&& ((Pawn*)board[srcRow][destCol])->canBeTakenEnPassant()) // can take en passant
 	{
 		// holy hell
