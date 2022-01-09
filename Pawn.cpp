@@ -49,7 +49,7 @@ bool Pawn::pieceLegality(const string route, Piece*** board)
 
 	if (destination[COL] == source[COL] && (int)destination[ROW] == (int)source[ROW] + 1 * forwardDirection)
 	{
-		return true; // pawn can move 1 step forward
+		return board[destRow][destCol]->getPieceType() == '#'; // pawn can move 1 step forward if there is no piece there
 	}
 
 	if (abs(destination[COL] - source[COL]) == 1 // goes 1 space to either side
