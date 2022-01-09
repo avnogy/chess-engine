@@ -210,6 +210,43 @@ bool Engine::EmptyPath()
 bool Engine::isCheckmate(Game& game, string location)
 {
 	//TODO: implement checkmate
+
+		//create a new game where the move is done
+		//seperating src and dst
+	string src = "", dst = "";
+	utility::separateMove(location, src, dst);
+	Game* demoGame = new Game(game);
+	demoGame->execute(location, src, dst);
+
+
+	demoGame->~Game();
+
+	return false;
+}
+
+bool Engine::checkCheck(Game& game)
+{
+	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
+	{
+		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
+		{
+			Piece* piece = game.board[row][col];
+			char pieceType = piece->getPieceType();
+			string pieceLocation = utility::indexesToString(row, col);
+			if (pieceType != '#' && piece->getPieceColor() == !game.currentPlayer)
+			{
+				string checktry = utility::indexesToString(row, col) + game._players[!game.currentPlayer]->_kingPosition;
+				if (game.getPieceFromString(pieceLocation)->pieceLegality(checktry, (game.board)))
+				{
+					if (canSrcMove(game, checktry) && !isPathBlocked(game, checktry) && !doesCauseDiscovery(game, checktry)) //board legality
+					{
+							return true; //piece can go there next move
+					}
+				}
+
+			}
+		}
+	}
 	return false;
 }
 

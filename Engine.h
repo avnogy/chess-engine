@@ -20,6 +20,8 @@ public:
 	//utility functions
 	static bool isCheckmate(Game& game, string location);
 
+	static bool checkCheck(Game& game);
+
 	static int boardLegality(Game& game, string location);
 
 	//board validity functions
