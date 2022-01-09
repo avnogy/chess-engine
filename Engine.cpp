@@ -241,14 +241,14 @@ bool Engine::checkCheck(Game& game)
 int Engine::boardLegality(Game& game, string location)
 {
 	int result = VALID_MOVE;
-	result = (checkCheck(game)) ? CHECK_MOVE : result;
 	result = (!result && !canSrcMove(game, location)) ? INVALID_MOVE_NO_SRC : result;
 	result = (!result && isDstOccupied(game, location)) ? INVALID_MOVE_DST_OCCUPIED : result;
 	result = (!result && doesCauseDiscovery(game, location)) ? INVALID_MOVE_DISCOVERY : result;
 	result = (!result && isOutOfBounds(location)) ? INVALID_INDEXES : result;
 	result = (!result && isPathBlocked(game, location)) ? INVALID_PIECE_MOVE : result;
 	result = (!result && areIndexesEqual(location)) ? INVALID_INDEXES_ARE_EQUAL : result;
-	result = (isCheckmate(game, location)) ? CHECKMATE : result;
+	result = (checkCheck(game)) ? CHECK_MOVE : result;
+	result = (result == CHECK_MOVE && isCheckmate(game, location)) ? CHECKMATE : result;
 
 	return result;
 }
