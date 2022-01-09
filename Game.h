@@ -25,13 +25,13 @@ class Game
 {
 private:
 	// fields
-	Player* _players[2];
 	char _outputCode[2];
 	// helper methods
 	void switchPlayer();
 	void clearBoard();
 	void removePiece(int row, int col);
 public:
+	Player* _players[2];
 	// fields
 	bool currentPlayer;
 	Piece*** board;
@@ -41,10 +41,12 @@ public:
 	// constructor & destructor
 	Game();
 	~Game();
+	Game(Game& other);
 
 	// methods
 	Piece* getPieceFromString(string location);
 	void copyBoardFromString(string boardString);
+	string getStringFromBoard();
 	void printBoard();
 	char* move(string moveData);
 };

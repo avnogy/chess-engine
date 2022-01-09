@@ -61,6 +61,20 @@ void Game::copyBoardFromString(string boardString)
 	}
 }
 
+string Game::getStringFromBoard()
+{
+	string result = "";
+	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
+	{
+		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
+		{
+			result += this->board[row][col]->getPieceType();
+		}
+	}
+	//cout << result << endl;
+	return result;
+}
+
 // frees all memory allocated on the board
 void Game::clearBoard()
 {
@@ -156,6 +170,34 @@ Game::~Game()
 		delete[] this->board[row];
 	}
 	delete[] this->board;
+}
+
+Game::Game(Game& other)
+{
+	this->currentPlayer = other.currentPlayer;
+	
+	//copying right colors
+	this->_players[WHITE] = new Player(other._players[WHITE]->isWhite());
+	this->_players[BLACK] = new Player(other._players[BLACK]->isWhite());
+
+	this->_outputCode[0] = 0;
+	this->_outputCode[1] = 0;
+
+	this->board = new Piece * *[BOARD_SIDE_LENGTH];
+	if (this->board == nullptr)
+	{
+		throw "memory allocation failure"; // pipi in our pampers
+	}
+	// initializing board as the other board
+	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
+	{
+		board[row] = new Piece * [BOARD_SIDE_LENGTH];
+		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
+		{
+			board[row][col] = nullptr;
+		}
+	}
+	copyBoardFromString(other.getStringFromBoard());
 }
 
 // prints the board to std::cout
