@@ -48,7 +48,7 @@ bool Engine::isOutOfBounds(string moveData)
 	string src = "", dst = "";
 	
 	//seperating src and dst
-	utility::separateMove(location, src, dst);
+	utility::separateMove(moveData, src, dst);
 
 	//checking if source is out of bounds
 	utility::stringToIndexes(src, row, col);
@@ -71,7 +71,7 @@ bool Engine::areIndexesEqual(string moveData)
 {
 	//seperating src and dst
 	string src = "", dst = ""; 
-	utility::separateMove(location, src, dst);
+	utility::separateMove(moveData, src, dst);
 
 	//checking if source and destination locations are equal
 	return (src == dst);
@@ -82,7 +82,7 @@ bool Engine::isPathBlocked(Game& game, string moveData)
 	//seperating src and dst
 	bool result = false;
 	string src = "", dst = "";
-	utility::separateMove(location, src, dst);
+	utility::separateMove(moveData, src, dst);
 
 	//getting indexes
 	int srcRow = 0, srcCol = 0, dstRow = 0, dstCol = 0;
