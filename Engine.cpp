@@ -247,7 +247,7 @@ int Engine::boardLegality(Game& game, string location)
 	result = (!result && isOutOfBounds(location)) ? INVALID_INDEXES : result;
 	result = (!result && isPathBlocked(game, location)) ? INVALID_PIECE_MOVE : result;
 	result = (!result && areIndexesEqual(location)) ? INVALID_INDEXES_ARE_EQUAL : result;
-	result = (checkCheck(game)) ? CHECK_MOVE : result;
+	result = (!result && checkCheck(game)) ? CHECK_MOVE : result;
 	result = (result == CHECK_MOVE && isCheckmate(game, location)) ? CHECKMATE : result;
 
 	return result;
