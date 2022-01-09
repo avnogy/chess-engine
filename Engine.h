@@ -24,20 +24,20 @@ public:
 
 	static bool checkCheck(Game& game);
 
-	static int boardLegality(Game& game, string location);
+	static int boardLegality(Game& game, string moveData);
 
 	//board validity functions
-	static bool canSrcMove(Game& game, string location);
+	static bool canSrcMove(Game& game, string moveData);
 
-	static bool isDstOccupied(Game& game, string location);
+	static bool isDstOccupied(Game& game, string moveData);
 
-	static bool doesCauseDiscovery(Game& game, string location);
+	static bool doesCauseDiscovery(Game& game, string moveData);
 
-	static bool isOutOfBounds(string location);
+	static bool isOutOfBounds(string moveData);
 
-	static bool areIndexesEqual(string location);
+	static bool areIndexesEqual(string moveData);
 
-	static bool isPathBlocked(Game& game, string location);
+	static bool isPathBlocked(Game& game, string moveData);
 
 	//piece specific path checking 
 	static bool knightPath(Game& game, int srcRow, int srcCol, int dstRow, int dstCol);

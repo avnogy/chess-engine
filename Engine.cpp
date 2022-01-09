@@ -2,11 +2,11 @@
 
 
 // returns true if source point is a piece that can move in this turn
-bool Engine::canSrcMove(Game &game,string location)
+bool Engine::canSrcMove(Game &game,string moveData)
 {
 	//seperating src and dst
 	string src = "", dst = "";
-	utility::separateMove(location, src, dst);
+	utility::separateMove(moveData, src, dst);
 
 	//checking if piece at source is not empty
 	Piece* piece = game.getPieceFromString(src);
@@ -14,11 +14,11 @@ bool Engine::canSrcMove(Game &game,string location)
 }
 
 // returns true if src can go there
-bool Engine::isDstOccupied(Game& game, string location)
+bool Engine::isDstOccupied(Game& game, string moveData)
 {
 	//seperating src and dst locations
 	string src = "", dst = "";
-	utility::separateMove(location, src, dst);
+	utility::separateMove(moveData, src, dst);
 	
 	//getting piece from dst location
 	Piece* dstPiece = nullptr;
@@ -29,13 +29,20 @@ bool Engine::isDstOccupied(Game& game, string location)
 	return (pType != '#' && dstPiece->getPieceColor() == game.currentPlayer);
 }
 
-bool Engine::doesCauseDiscovery(Game& game, string location)
+//does current move make current player die
+bool Engine::doesCauseDiscovery(Game& game, string moveData)
 {
-	return false;
+	//create a new game where the move is done
+	Game demoGame(game);
+	demoGame.execute(moveData);
+
+	//check if discovered a check
+	demoGame.switchPlayer();
+	return checkCheck(demoGame);
 }
 
 //returns true if out of bounds
-bool Engine::isOutOfBounds(string location)
+bool Engine::isOutOfBounds(string moveData)
 {
 	int row = 0, col = 0;
 	string src = "", dst = "";
@@ -60,7 +67,7 @@ bool Engine::isOutOfBounds(string location)
 	return false; // if neither src nor dst are out of bounds return false
 }
 
-bool Engine::areIndexesEqual(string location)
+bool Engine::areIndexesEqual(string moveData)
 {
 	//seperating src and dst
 	string src = "", dst = ""; 
@@ -70,7 +77,7 @@ bool Engine::areIndexesEqual(string location)
 	return (src == dst);
 }
 
-bool Engine::isPathBlocked(Game& game, string location)
+bool Engine::isPathBlocked(Game& game, string moveData)
 {
 	//seperating src and dst
 	bool result = false;
@@ -212,6 +219,7 @@ bool Engine::isCheckmate(Game& game, string location)
 	return false;
 }
 
+//is current move a check
 bool Engine::isCheck(Game& game, string moveData)
 {
 	//seperating src and dst
@@ -220,10 +228,9 @@ bool Engine::isCheck(Game& game, string moveData)
 
 	//create a new game where the move is done
 	Game demoGame(game);
-	demoGame.execute(moveData, src, dst);
+	demoGame.execute(moveData);
 
 	//check if threatened the king
-	demoGame.switchPlayer();
 	return checkCheck(demoGame);
 }
 
@@ -237,7 +244,7 @@ bool Engine::checkCheck(Game& game)
 			Piece* piece = game.board[row][col];
 			char pieceType = piece->getPieceType();
 			string pieceLocation = utility::indexesToString(row, col);
-			if (pieceType != '#' && piece->getPieceColor() == !game.currentPlayer)
+			if (pieceType != '#' && piece->getPieceColor() == game.currentPlayer) //if current player is white value is zero so this is essentially like writing !!currentPlayer
 			{
 				string checktry = pieceLocation + game._players[game.currentPlayer]->_kingPosition;
 				if (game.getPieceFromString(pieceLocation)->pieceLegality(checktry, (game.board)))
@@ -253,17 +260,17 @@ bool Engine::checkCheck(Game& game)
 	}
 }
 
-int Engine::boardLegality(Game& game, string location)
+int Engine::boardLegality(Game& game, string moveData)
 {
 	int result = VALID_MOVE;
-	result = (!result && !canSrcMove(game, location)) ? INVALID_MOVE_NO_SRC : result;
-	result = (!result && isDstOccupied(game, location)) ? INVALID_MOVE_DST_OCCUPIED : result;
-	result = (!result && doesCauseDiscovery(game, location)) ? INVALID_MOVE_DISCOVERY : result;
-	result = (!result && isOutOfBounds(location)) ? INVALID_INDEXES : result;
-	result = (!result && isPathBlocked(game, location)) ? INVALID_PIECE_MOVE : result;
-	result = (!result && areIndexesEqual(location)) ? INVALID_INDEXES_ARE_EQUAL : result;
-	result = (!result && isCheck(game)) ? CHECK_MOVE : result;
-	result = (result == CHECK_MOVE && isCheckmate(game, location)) ? CHECKMATE : result;
+	result = (!result && !canSrcMove(game, moveData)) ? INVALID_MOVE_NO_SRC : result;
+	result = (!result && isDstOccupied(game, moveData)) ? INVALID_MOVE_DST_OCCUPIED : result;
+	result = (!result && doesCauseDiscovery(game, moveData)) ? INVALID_MOVE_DISCOVERY : result;
+	result = (!result && isOutOfBounds(moveData)) ? INVALID_INDEXES : result;
+	result = (!result && isPathBlocked(game, moveData)) ? INVALID_PIECE_MOVE : result;
+	result = (!result && areIndexesEqual(moveData)) ? INVALID_INDEXES_ARE_EQUAL : result;
+	result = (!result && isCheck(game, moveData)) ? CHECK_MOVE : result;
+	result = (result == CHECK_MOVE && isCheckmate(game, moveData)) ? CHECKMATE : result;
 
 	return result;
 }
