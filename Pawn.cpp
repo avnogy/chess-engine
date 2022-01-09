@@ -41,7 +41,11 @@ bool Pawn::pieceLegality(const string route, Piece*** board)
 
 	isInInitialPosition = islower(this->_pieceType) && source[ROW] == WHITE_INITIAL_ROW ||
 							isupper(this->_pieceType) && source[ROW] == BLACK_INITIAL_ROW;
-	if (isInInitialPosition && destination[COL] == source[COL] && (int)destination[ROW] == (int)source[ROW] + 2 * forwardDirection)
+	if (isInInitialPosition // did not move yet
+		&& destination[COL] == source[COL] // goes straight ahead
+		&& (int)destination[ROW] == (int)source[ROW] + 2 * forwardDirection // goes 2 spaces
+		&& board[destRow][destCol]->getPieceType() == '#' // doesn't land on piece
+		&& board[destRow - 1 * forwardDirection][destCol]->getPieceType() == '#') // doesn't skip over a piece
 	{
 		setEnPassantFlag(true);
 		return true; // pawn can move two steps forward if in initial position
