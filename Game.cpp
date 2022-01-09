@@ -228,9 +228,6 @@ char* Game::move(string moveData)
 		{
 			// executing move
 			execute(moveData,src, dst);
-			
-			//end of turn
-			switchPlayer();
 		}
 	}
 	else
@@ -274,6 +271,9 @@ void Game::execute(string moveData, string src, string dst)
 			((Pawn*)board[rowToClearEnPassantFlags][i])->setEnPassantFlag(false);
 		}
 	}
+
+	//end of turn
+	switchPlayer();
 }
 
 
