@@ -227,7 +227,7 @@ char* Game::move(string moveData)
 		if (_outputCode[0] == '0' || _outputCode[0] == '1' || _outputCode[0] == '8')
 		{
 			// executing move
-			execute(moveData,src, dst);
+			execute(moveData);
 		}
 	}
 	else
@@ -238,8 +238,12 @@ char* Game::move(string moveData)
 	return this->_outputCode;
 }
 
-void Game::execute(string moveData, string src, string dst)
+void Game::execute(string moveData)
 {
+	//seperating src and dst
+	string src = "", dst = "";
+	utility::separateMove(moveData, src, dst);
+
 	//getting indexes
 	int srcRow = 0, srcCol = 0, dstRow = 0, dstCol = 0;
 	utility::stringToIndexes(src, srcRow, srcCol);
