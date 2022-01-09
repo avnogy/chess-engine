@@ -213,6 +213,7 @@ bool Engine::isCheckmate(Game& game, string location)
 	return false;
 }
 
+//this function creates a game where move in moveData is done and checks for checks
 bool Engine::checkCheck(Game& game, string moveData)
 {
 	//seperating src and dst
