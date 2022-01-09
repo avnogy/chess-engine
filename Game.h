@@ -49,4 +49,5 @@ public:
 	string getStringFromBoard();
 	void printBoard();
 	char* move(string moveData);
+	void execute(string moveData,string src,string dst);
 };

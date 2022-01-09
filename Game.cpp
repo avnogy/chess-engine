@@ -227,39 +227,8 @@ char* Game::move(string moveData)
 		if (_outputCode[0] == '0' || _outputCode[0] == '1' || _outputCode[0] == '8')
 		{
 			// executing move
+			execute(moveData,src, dst);
 			
-			//getting indexes
-			int srcRow = 0,srcCol = 0,dstRow = 0,dstCol = 0;
-			utility::stringToIndexes(src, srcRow, srcCol);
-			utility::stringToIndexes(dst, dstRow, dstCol);
-
-			// updating king position
-			if (toupper(this->board[srcRow][srcCol]->getPieceType()) == 'K')
-			{
-				this->_players[currentPlayer]->_kingPosition = dst;
-			}
-
-			//destroying dest piece
-			removePiece(dstRow, dstCol);
-			//moving src piece
-			this->board[dstRow][dstCol] = this->board[srcRow][srcCol];
-			//putting nothing in src location
-			this->board[srcRow][srcCol] = new Empty();
-
-			// clearing en passant flags
-			int rowToClearEnPassantFlags = BLACK_INITIAL_ROW - '0' - 2;
-			if (currentPlayer == WHITE)
-			{
-				rowToClearEnPassantFlags = WHITE_INITIAL_ROW - '0' + 2;
-			}
-			for (int i = 0; i < BOARD_SIDE_LENGTH; i++)
-			{
-				if (tolower(board[rowToClearEnPassantFlags][i]->getPieceType()) == 'p')
-				{
-					((Pawn*)board[rowToClearEnPassantFlags][i])->setEnPassantFlag(false);
-				}
-			}
-
 			//end of turn
 			switchPlayer();
 		}
@@ -270,6 +239,41 @@ char* Game::move(string moveData)
 	}
 	
 	return this->_outputCode;
+}
+
+void Game::execute(string moveData, string src, string dst)
+{
+	//getting indexes
+	int srcRow = 0, srcCol = 0, dstRow = 0, dstCol = 0;
+	utility::stringToIndexes(src, srcRow, srcCol);
+	utility::stringToIndexes(dst, dstRow, dstCol);
+
+	// updating king position
+	if (toupper(this->board[srcRow][srcCol]->getPieceType()) == 'K')
+	{
+		this->_players[currentPlayer]->_kingPosition = dst;
+	}
+
+	//destroying dest piece
+	removePiece(dstRow, dstCol);
+	//moving src piece
+	this->board[dstRow][dstCol] = this->board[srcRow][srcCol];
+	//putting nothing in src location
+	this->board[srcRow][srcCol] = new Empty();
+
+	// clearing en passant flags
+	int rowToClearEnPassantFlags = BLACK_INITIAL_ROW - '0' - 2;
+	if (currentPlayer == WHITE)
+	{
+		rowToClearEnPassantFlags = WHITE_INITIAL_ROW - '0' + 2;
+	}
+	for (int i = 0; i < BOARD_SIDE_LENGTH; i++)
+	{
+		if (tolower(board[rowToClearEnPassantFlags][i]->getPieceType()) == 'p')
+		{
+			((Pawn*)board[rowToClearEnPassantFlags][i])->setEnPassantFlag(false);
+		}
+	}
 }
 
 
