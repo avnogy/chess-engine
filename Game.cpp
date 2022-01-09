@@ -61,6 +61,20 @@ void Game::copyBoardFromString(string boardString)
 	}
 }
 
+string Game::getStringFromBoard()
+{
+	string result = "";
+	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
+	{
+		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
+		{
+			result += this->board[row][col]->getPieceType();
+		}
+	}
+	//cout << result << endl;
+	return result;
+}
+
 // frees all memory allocated on the board
 void Game::clearBoard()
 {
@@ -158,6 +172,34 @@ Game::~Game()
 	delete[] this->board;
 }
 
+Game::Game(Game& other)
+{
+	this->currentPlayer = other.currentPlayer;
+	
+	//copying right colors
+	this->_players[WHITE] = new Player(other._players[WHITE]->isWhite());
+	this->_players[BLACK] = new Player(other._players[BLACK]->isWhite());
+
+	this->_outputCode[0] = 0;
+	this->_outputCode[1] = 0;
+
+	this->board = new Piece * *[BOARD_SIDE_LENGTH];
+	if (this->board == nullptr)
+	{
+		throw "memory allocation failure"; // pipi in our pampers
+	}
+	// initializing board as the other board
+	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
+	{
+		board[row] = new Piece * [BOARD_SIDE_LENGTH];
+		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
+		{
+			board[row][col] = nullptr;
+		}
+	}
+	copyBoardFromString(other.getStringFromBoard());
+}
+
 // prints the board to std::cout
 void Game::printBoard()
 {
@@ -185,39 +227,8 @@ char* Game::move(string moveData)
 		if (_outputCode[0] == '0' || _outputCode[0] == '1' || _outputCode[0] == '8')
 		{
 			// executing move
+			execute(moveData,src, dst);
 			
-			//getting indexes
-			int srcRow = 0,srcCol = 0,dstRow = 0,dstCol = 0;
-			utility::stringToIndexes(src, srcRow, srcCol);
-			utility::stringToIndexes(dst, dstRow, dstCol);
-
-			// updating king position
-			if (toupper(this->board[srcRow][srcCol]->getPieceType()) == 'K')
-			{
-				this->_players[currentPlayer]->_kingPosition = dst;
-			}
-
-			//destroying dest piece
-			removePiece(dstRow, dstCol);
-			//moving src piece
-			this->board[dstRow][dstCol] = this->board[srcRow][srcCol];
-			//putting nothing in src location
-			this->board[srcRow][srcCol] = new Empty();
-
-			// clearing en passant flags
-			int rowToClearEnPassantFlags = BLACK_INITIAL_ROW - '0' - 2;
-			if (currentPlayer == WHITE)
-			{
-				rowToClearEnPassantFlags = WHITE_INITIAL_ROW - '0' + 2;
-			}
-			for (int i = 0; i < BOARD_SIDE_LENGTH; i++)
-			{
-				if (tolower(board[rowToClearEnPassantFlags][i]->getPieceType()) == 'p')
-				{
-					((Pawn*)board[rowToClearEnPassantFlags][i])->setEnPassantFlag(false);
-				}
-			}
-
 			//end of turn
 			switchPlayer();
 		}
@@ -228,6 +239,41 @@ char* Game::move(string moveData)
 	}
 	
 	return this->_outputCode;
+}
+
+void Game::execute(string moveData, string src, string dst)
+{
+	//getting indexes
+	int srcRow = 0, srcCol = 0, dstRow = 0, dstCol = 0;
+	utility::stringToIndexes(src, srcRow, srcCol);
+	utility::stringToIndexes(dst, dstRow, dstCol);
+
+	// updating king position
+	if (toupper(this->board[srcRow][srcCol]->getPieceType()) == 'K')
+	{
+		this->_players[currentPlayer]->_kingPosition = dst;
+	}
+
+	//destroying dest piece
+	removePiece(dstRow, dstCol);
+	//moving src piece
+	this->board[dstRow][dstCol] = this->board[srcRow][srcCol];
+	//putting nothing in src location
+	this->board[srcRow][srcCol] = new Empty();
+
+	// clearing en passant flags
+	int rowToClearEnPassantFlags = BLACK_INITIAL_ROW - '0' - 2;
+	if (currentPlayer == WHITE)
+	{
+		rowToClearEnPassantFlags = WHITE_INITIAL_ROW - '0' + 2;
+	}
+	for (int i = 0; i < BOARD_SIDE_LENGTH; i++)
+	{
+		if (tolower(board[rowToClearEnPassantFlags][i]->getPieceType()) == 'p')
+		{
+			((Pawn*)board[rowToClearEnPassantFlags][i])->setEnPassantFlag(false);
+		}
+	}
 }
 
 
