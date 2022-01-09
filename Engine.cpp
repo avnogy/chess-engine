@@ -235,7 +235,7 @@ bool Engine::checkCheck(Game& game)
 			string pieceLocation = utility::indexesToString(row, col);
 			if (pieceType != '#' && piece->getPieceColor() == !game.currentPlayer)
 			{
-				string checktry = utility::indexesToString(row, col) + game._players[!game.currentPlayer]->_kingPosition;
+				string checktry = pieceLocation + game._players[!game.currentPlayer]->_kingPosition;
 				if (game.getPieceFromString(pieceLocation)->pieceLegality(checktry, (game.board)))
 				{
 					if (canSrcMove(game, checktry) && !isPathBlocked(game, checktry) && !doesCauseDiscovery(game, checktry)) //board legality
