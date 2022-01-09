@@ -27,10 +27,10 @@ private:
 	// fields
 	char _outputCode[2];
 	// helper methods
-	void switchPlayer();
 	void clearBoard();
 	void removePiece(int row, int col);
 public:
+	void switchPlayer();
 	Player* _players[2];
 	// fields
 	bool currentPlayer;
