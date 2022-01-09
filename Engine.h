@@ -20,7 +20,7 @@ public:
 	//utility functions
 	static bool isCheckmate(Game& game, string location);
 
-	static bool checkCheck(Game& game);
+	static bool checkCheck(Game& game, string moveData);
 
 	static int boardLegality(Game& game, string location);
 
