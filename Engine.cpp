@@ -169,7 +169,7 @@ bool Engine::bishopPath(Game& game, int srcRow, int srcCol, int dstRow, int dstC
 	{
 		for (int i = 1; i <= (abs(srcCol - dstCol) - 1) && !flag; i++)
 		{
-			flag = flag || game.board[srcRow + i][srcCol - i]->getPieceType() != '#';
+			flag = flag || game.board[srcRow - i][srcCol + i]->getPieceType() != '#';
 		}
 	}
 	else if (srcCol < dstCol && srcRow < dstRow) //id moves right and up
