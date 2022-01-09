@@ -31,7 +31,6 @@ bool Engine::isDstOccupied(Game& game, string location)
 
 bool Engine::doesCauseDiscovery(Game& game, string location)
 {
-	//TODO: implement discovery
 	return false;
 }
 
@@ -213,50 +212,39 @@ bool Engine::isCheckmate(Game& game, string location)
 	return false;
 }
 
-//this function creates a game where move in moveData is done and checks for checks
-bool Engine::checkCheck(Game& game, string moveData)
+//checks for checks from enemy in position
+bool Engine::checkCheck(Game& game)
 {
-	//seperating src and dst
-	string src = "", dst = "";
-	utility::separateMove(moveData, src, dst);
-
-	//create a new game where the move is done
-	Game* demoGame = new Game(game);
-	demoGame->execute(moveData, src, dst);
-
 	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
 	{
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
 		{
-			Piece* piece = demoGame->board[row][col];
+			Piece* piece = game.board[row][col];
 			char pieceType = piece->getPieceType();
 			string pieceLocation = utility::indexesToString(row, col);
-			if (pieceType != '#' && piece->getPieceColor() == !demoGame->currentPlayer)
+			if (pieceType != '#' && piece->getPieceColor() == !game.currentPlayer)
 			{
-				string checktry = pieceLocation + game._players[!demoGame->currentPlayer]->_kingPosition;
-
-				if (demoGame->getPieceFromString(pieceLocation)->pieceLegality(checktry, (demoGame->board)))
+				string checktry = pieceLocation + game._players[game.currentPlayer]->_kingPosition;
+				if (game.getPieceFromString(pieceLocation)->pieceLegality(checktry, (game.board)))
 				{
-					if (canSrcMove(game, checktry) && !isPathBlocked(game, checktry) && !doesCauseDiscovery(game, moveData)) //board legality
+					if (canSrcMove(game, checktry) && !isPathBlocked(game, checktry) && !doesCauseDiscovery(game, checktry)) //board legality
 					{
-							return true; //piece can go there next move
+						return true; //piece can go there next move
 					}
 				}
-
 			}
 		}
+		return false;
 	}
-	demoGame->~Game();
-	return false;
 }
 
 int Engine::boardLegality(Game& game, string location)
 {
 	int result = VALID_MOVE;
-	//TODO: implement check check :)
+	result = (!result && checkCheck(game)) ? CHECK_MOVE : result;
 	result = (!result && !canSrcMove(game, location)) ? INVALID_MOVE_NO_SRC : result;
 	result = (!result && isDstOccupied(game, location)) ? INVALID_MOVE_DST_OCCUPIED : result;
-	//result = (!result && doesCauseDiscovery(game, location)) ? INVALID_MOVE_DISCOVERY : result;
+	result = (!result && doesCauseDiscovery(game, location)) ? INVALID_MOVE_DISCOVERY : result;
 	result = (!result && isOutOfBounds(location)) ? INVALID_INDEXES : result;
 	result = (!result && isPathBlocked(game, location)) ? INVALID_PIECE_MOVE : result;
 	result = (!result && areIndexesEqual(location)) ? INVALID_INDEXES_ARE_EQUAL : result;
