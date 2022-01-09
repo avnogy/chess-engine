@@ -212,6 +212,21 @@ bool Engine::isCheckmate(Game& game, string location)
 	return false;
 }
 
+bool Engine::isCheck(Game& game, string moveData)
+{
+	//seperating src and dst
+	string src = "", dst = "";
+	utility::separateMove(moveData, src, dst);
+
+	//create a new game where the move is done
+	Game demoGame(game);
+	demoGame.execute(moveData, src, dst);
+
+	//check if threatened the king
+	demoGame.switchPlayer();
+	return checkCheck(demoGame);
+}
+
 //checks for checks from enemy in position
 bool Engine::checkCheck(Game& game)
 {
@@ -247,7 +262,7 @@ int Engine::boardLegality(Game& game, string location)
 	result = (!result && isOutOfBounds(location)) ? INVALID_INDEXES : result;
 	result = (!result && isPathBlocked(game, location)) ? INVALID_PIECE_MOVE : result;
 	result = (!result && areIndexesEqual(location)) ? INVALID_INDEXES_ARE_EQUAL : result;
-	result = (!result && checkCheck(game)) ? CHECK_MOVE : result;
+	result = (!result && isCheck(game)) ? CHECK_MOVE : result;
 	result = (result == CHECK_MOVE && isCheckmate(game, location)) ? CHECKMATE : result;
 
 	return result;
