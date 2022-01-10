@@ -35,13 +35,12 @@ bool Engine::doesCauseDiscovery(Game& game, string moveData)
 	//create a new game where the move is done
 	Game demoGame(game);
 	demoGame.execute(moveData);
+	demoGame.switchPlayer();
 
 	//check if discovered a check
-	demoGame.switchPlayer();
-	demoGame.printBoard();
-	cout << "discovery:" << endl;
+	bool result = checkCheck(demoGame);
 	demoGame.~Game();
-	return checkCheck(demoGame);
+	return result;
 }
 
 //returns true if out of bounds
@@ -228,11 +227,11 @@ bool Engine::isCheck(Game& game, string moveData)
 	//create a new game where the move is done
 	Game demoGame(game);
 	demoGame.execute(moveData);
-	demoGame.printBoard();
-	cout << "isCheck:" << endl;
+
 	//check if threatened the king
+	bool result = checkCheck(demoGame);
 	demoGame.~Game();
-	return checkCheck(demoGame);
+	return result;
 }
 
 //checks for checks from enemy in position
