@@ -1,5 +1,5 @@
 #include "King.h"
-
+#include "Rook.h"
 King::King(bool isWhite) : Piece('k')
 {
 	this->_canCastle = true;
@@ -25,6 +25,47 @@ bool King::pieceLegality(const string route, Piece*** board)
 	{
 		setCastleFlag(false);
 		return true;
+	}
+	else if (source[1] == destination[1] && abs(source[0] - destination[0]) == 2)
+	{
+		if (this->_canCastle)
+		{
+			if (source[1] - destination[1] > 0) //if went left
+			{
+				if (!this->getPieceColor())//if white
+				{
+					if (board[0][0]->getPieceType() == 'R' && ((Rook*)board[0][0])->canCastle())
+					{
+						return true;
+					}
+				}
+				else //black
+				{
+					if (board[7][7]->getPieceType() == 'r' && ((Rook*)board[7][7])->canCastle())
+					{
+						return true;
+					}
+				}
+			}
+			else //went right
+			{
+				if (!this->getPieceColor())//if white
+				{
+					if (board[7][0]->getPieceType() == 'R' && ((Rook*)board[0][0])->canCastle())
+					{
+						return true;
+					}
+				}
+				else //black
+				{
+					if (board[0][7]->getPieceType() == 'r' && ((Rook*)board[7][7])->canCastle())
+					{
+						return true;
+					}
+				}
+			}
+		}
+
 	}
 	return false;
 }
