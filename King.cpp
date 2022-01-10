@@ -14,7 +14,7 @@ King::~King()
 }
 
 // returns true if position is next to the current position
-bool King::pieceLegality(const string route, Piece*** board)
+int King::pieceLegality(const string route, Piece*** board)
 {
 	string destination;
 	string source;
@@ -24,7 +24,7 @@ bool King::pieceLegality(const string route, Piece*** board)
 	if (abs(source[0] - destination[0]) == 1 || abs(source[1] - destination[1]) == 1)
 	{
 		setCastleFlag(false);
-		return true;
+		return NORMAL_MOVE;
 	}
 	else if (source[1] == destination[1] && abs(source[0] - destination[0]) == 2)
 	{
@@ -36,14 +36,16 @@ bool King::pieceLegality(const string route, Piece*** board)
 				{
 					if (board[0][0]->getPieceType() == 'R' && ((Rook*)board[0][0])->canCastle())
 					{
-						return true;
+						setCastleFlag(false);
+						return CASTLING;
 					}
 				}
 				else //black
 				{
 					if (board[7][7]->getPieceType() == 'r' && ((Rook*)board[7][7])->canCastle())
 					{
-						return true;
+						setCastleFlag(false);
+						return CASTLING;
 					}
 				}
 			}
@@ -53,21 +55,23 @@ bool King::pieceLegality(const string route, Piece*** board)
 				{
 					if (board[7][0]->getPieceType() == 'R' && ((Rook*)board[0][0])->canCastle())
 					{
-						return true;
+						setCastleFlag(false);
+						return CASTLING;
 					}
 				}
 				else //black
 				{
 					if (board[0][7]->getPieceType() == 'r' && ((Rook*)board[7][7])->canCastle())
 					{
-						return true;
+						setCastleFlag(false);
+						return CASTLING;
 					}
 				}
 			}
 		}
 
 	}
-	return false;
+	return DENIED_MOVE;
 }
 
 bool King::canCastle() const

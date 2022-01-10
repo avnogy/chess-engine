@@ -13,12 +13,12 @@ Knight::~Knight()
 }
 
 // im really not sure how the horsey moves tbh
-bool Knight::pieceLegality(const string route, Piece*** board)
+int Knight::pieceLegality(const string route, Piece*** board)
 {
 	string destination;
 	string source;
 	utility::separateMove(route, source, destination);
 
 	return (abs(destination[0] - source[0]) == 2 && abs(destination[1] - source[1]) == 1) ||
-		(abs(destination[0] - source[0]) == 1 && abs(destination[1] - source[1]) == 2);
+		(abs(destination[0] - source[0]) == 1 && abs(destination[1] - source[1]) == 2) ? NORMAL_MOVE : DENIED_MOVE;
 }

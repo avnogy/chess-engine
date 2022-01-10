@@ -13,7 +13,7 @@ public:
 
 	//checks if destination square is according to piece movement.
 	//this function is created for each piece type.
-	virtual bool pieceLegality(const string route, Piece*** board) = 0;
+	virtual int pieceLegality(const string route, Piece*** board) = 0;
 
 	//returns piece color
 	bool getPieceColor();

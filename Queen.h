@@ -7,5 +7,5 @@ class Queen : public Piece
 public:
     Queen(bool isWhite);
     ~Queen();
-    virtual bool pieceLegality(const string route, Piece*** board) override;
+    virtual int pieceLegality(const string route, Piece*** board) override;
 };

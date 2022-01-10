@@ -14,7 +14,7 @@ Rook::~Rook()
 }
 
 // returns true if destination is on the same row or on the same column as the source
-bool Rook::pieceLegality(const string route, Piece*** board)
+int Rook::pieceLegality(const string route, Piece*** board)
 {
 	string destination;
 	string source;
@@ -23,9 +23,9 @@ bool Rook::pieceLegality(const string route, Piece*** board)
 	if (destination[0] == source[0] || destination[1] == source[1])
 	{
 		setCastleFlag(false);
-		return true;
+		return NORMAL_MOVE;
 	}
-	return false;
+	return DENIED_MOVE;
 }
 
 bool Rook::canCastle() const

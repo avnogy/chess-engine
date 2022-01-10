@@ -29,7 +29,7 @@ bool Pawn::pieceLegality(const string route, Piece*** board)
 	int destRow = 0, destCol = 0;
 	int srcRow = 0, srcCol = 0;
 	bool isInInitialPosition = false;
-	
+
 	utility::separateMove(route, source, destination);
 	utility::stringToIndexes(destination, destRow, destCol);
 	utility::stringToIndexes(source, srcRow, srcCol);
@@ -40,7 +40,7 @@ bool Pawn::pieceLegality(const string route, Piece*** board)
 	}
 
 	isInInitialPosition = islower(this->_pieceType) && source[ROW] == WHITE_INITIAL_ROW ||
-							isupper(this->_pieceType) && source[ROW] == BLACK_INITIAL_ROW;
+		isupper(this->_pieceType) && source[ROW] == BLACK_INITIAL_ROW;
 	if (isInInitialPosition // did not move yet
 		&& destination[COL] == source[COL] // goes straight ahead
 		&& (int)destination[ROW] == (int)source[ROW] + 2 * forwardDirection // goes 2 spaces
@@ -48,12 +48,12 @@ bool Pawn::pieceLegality(const string route, Piece*** board)
 		&& board[destRow - 1 * forwardDirection][destCol]->getPieceType() == '#') // doesn't skip over a piece
 	{
 		setEnPassantFlag(true);
-		return true; // pawn can move two steps forward if in initial position
+		return NORMAL_MOVE; // pawn can move two steps forward if in initial position
 	}
 
 	if (destination[COL] == source[COL] && (int)destination[ROW] == (int)source[ROW] + 1 * forwardDirection)
 	{
-		return board[destRow][destCol]->getPieceType() == '#'; // pawn can move 1 step forward if there is no piece there
+		return (board[destRow][destCol]->getPieceType() == '#') ? NORMAL_MOVE : DENIED_MOVE; // pawn can move 1 step forward if there is no piece there
 	}
 
 	if (abs(destination[COL] - source[COL]) == 1 // goes 1 space to either side
@@ -61,9 +61,9 @@ bool Pawn::pieceLegality(const string route, Piece*** board)
 		&& board[destRow][destCol]->getPieceType() != '#' // lands on a piece
 		&& isupper(board[destRow][destCol]->getPieceType()) != isupper(this->getPieceType())) // does not land on friendly piece
 	{
-		return true;
+		return NORMAL_MOVE;
 	}
-	
+
 	if (abs(destination[COL] - source[COL]) == 1 // goes 1 space to the side
 		&& (int)destination[ROW] == (int)source[ROW] + 1 * forwardDirection // goes 1 space forward
 		&& tolower(board[srcRow][destCol]->getPieceType()) == 'p'
@@ -72,10 +72,10 @@ bool Pawn::pieceLegality(const string route, Piece*** board)
 		// holy hell
 		delete (Pawn*)board[srcRow][destCol];
 		board[srcRow][destCol] = new Empty();
-		return true;
+		return EN_PASSANT;
 	}
 
-	return false;
+	return DENIED_MOVE;
 }
 
 bool Pawn::canBeTakenEnPassant() const

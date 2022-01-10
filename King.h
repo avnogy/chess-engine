@@ -9,7 +9,7 @@ private:
 public:
     King(bool isWhite);
     ~King();
-    virtual bool pieceLegality(const string route, Piece*** board) override;
+    virtual int pieceLegality(const string route, Piece*** board) override;
 
     // getters & setters
     bool canCastle() const;

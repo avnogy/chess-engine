@@ -10,7 +10,7 @@ Empty::~Empty()
 }
 
 // an empty piece cannot move anywhere
-bool Empty::pieceLegality(const string route, Piece*** board)
+int Empty::pieceLegality(const string route, Piece*** board)
 {
-	return false;
+	return DENIED_MOVE;
 }
