@@ -252,6 +252,7 @@ bool Engine::checkCheck(Game& game)
 				cout << checktry << endl;
 				if (game.getPieceFromString(pieceLocation)->pieceLegality(checktry, game.board))
 				{
+					game.switchPlayer();//for discovery check
 					if (!isPathBlocked(game, checktry) && !doesCauseDiscovery(game, checktry)) //board legality
 					{
 						return true; //piece can go there next move
