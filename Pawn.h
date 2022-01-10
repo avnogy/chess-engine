@@ -8,10 +8,14 @@
 class Pawn : public Piece
 {
 private:
+    //fields
     bool _enPassantFlag; // google en passant
 public:
+    //constructor & destructor
     Pawn(bool isWhite);
     ~Pawn();
+
+    //methods
     virtual int pieceLegality(const string route, Piece*** board) override;
 
     // getters & setters

@@ -9,7 +9,8 @@ public:
 
 	//getter
 	bool isWhite() const;
-	// public fields
+
+	// fields
 	string _kingPosition = "";
 private:
 	// fields

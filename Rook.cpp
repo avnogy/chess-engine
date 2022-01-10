@@ -28,11 +28,13 @@ int Rook::pieceLegality(const string route, Piece*** board)
 	return DENIED_MOVE;
 }
 
+//getter
 bool Rook::canCastle() const
 {
 	return this->_canCastle;
 }
 
+//setter
 void Rook::setCastleFlag(const bool newState)
 {
 	this->_canCastle = newState;

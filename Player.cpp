@@ -17,6 +17,7 @@ Player::~Player()
 {
 }
 
+//getter
 bool Player::isWhite() const
 {
 	return this->_isWhite;

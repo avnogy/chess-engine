@@ -26,15 +26,16 @@ class Game
 private:
 	// fields
 	char _outputCode[2];
+
 	// helper methods
 	void clearBoard();
 	void removePiece(int row, int col);
 public:
-	void switchPlayer();
-	Player* _players[2];
 	// fields
+	Player* _players[2];
 	bool currentPlayer;
 	Piece*** board;
+
 	// static variable
 	static string INITIAL_BOARD;
 
@@ -44,6 +45,7 @@ public:
 	Game(Game& other);
 
 	// methods
+	void switchPlayer();
 	Piece* getPieceFromString(string location);
 	void copyBoardFromString(string boardString);
 	string getStringFromBoard();

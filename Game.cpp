@@ -61,6 +61,7 @@ void Game::copyBoardFromString(string boardString)
 	}
 }
 
+//returns string from current board state
 string Game::getStringFromBoard()
 {
 	string result = "";
@@ -87,6 +88,7 @@ void Game::clearBoard()
 	}
 }
 
+//removes a piece according to its type
 void Game::removePiece(int row, int col)
 {
 	if (this->board[row][col] != nullptr)
@@ -172,6 +174,7 @@ Game::~Game()
 	delete[] this->board;
 }
 
+//copy constructor
 Game::Game(Game& other)
 {
 	this->currentPlayer = other.currentPlayer;
@@ -216,6 +219,7 @@ void Game::printBoard()
 	}
 }
 
+//executes everything in a move
 char* Game::move(string moveData)
 {
 	//seperating src and dst
@@ -288,6 +292,7 @@ char* Game::move(string moveData)
 	return this->_outputCode;
 }
 
+//helper method for actually doing the move
 void Game::execute(string moveData)
 {
 	//seperating src and dst
@@ -331,7 +336,7 @@ void Game::execute(string moveData)
 	this->switchPlayer();
 }
 
-
+//gets a piece from location in string
 Piece* Game::getPieceFromString(string location)
 {
 	int row = 0, col = 0;

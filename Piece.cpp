@@ -9,6 +9,7 @@ Piece::~Piece()
 {
 }
 
+//checks if piece moves
 bool Piece::doesMove(const string input) const
 {
 	string src = "", dst = "";
@@ -24,11 +25,13 @@ bool Piece::getPieceColor()
 	return isupper(getPieceType());
 }
 
+//getter
 char Piece::getPieceType() const
 {
 	return this->_pieceType;
 }
 
+//setter
 void Piece::setPieceType(const char new_type)
 {
 	this->_pieceType = new_type;

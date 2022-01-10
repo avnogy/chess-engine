@@ -7,8 +7,11 @@ class Rook : public Piece
 private:
     bool _canCastle;
 public:
+    //constructor & destructor
     Rook(bool isWhite);
     ~Rook();
+
+    //methods
     virtual int pieceLegality(const string route, Piece*** board) override;
 
     // getters & setters

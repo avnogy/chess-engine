@@ -67,6 +67,7 @@ bool Engine::isOutOfBounds(string moveData)
 	return false; // if neither src nor dst are out of bounds return false
 }
 
+//checks if indexes are equal
 bool Engine::areIndexesEqual(string moveData)
 {
 	//seperating src and dst
@@ -77,6 +78,7 @@ bool Engine::areIndexesEqual(string moveData)
 	return (src == dst);
 }
 
+//checks if path to destination square is blocked
 bool Engine::isPathBlocked(Game& game, string moveData)
 {
 	//seperating src and dst
@@ -212,13 +214,6 @@ bool Engine::EmptyPath()
 	return false; //uhh why.
 }
 
-
-bool Engine::isCheckmate(Game& game, string location)
-{
-	//TODO: implement checkmate
-	return false;
-}
-
 //is current move a check
 bool Engine::isCheck(Game& game, string moveData)
 {
@@ -263,6 +258,7 @@ bool Engine::checkCheck(Game& game)
 	return false;
 }
 
+//check if move is legal
 int Engine::boardLegality(Game& game, string moveData)
 {
 	int result = VALID_MOVE;
@@ -273,7 +269,6 @@ int Engine::boardLegality(Game& game, string moveData)
 	result = (!result && isPathBlocked(game, moveData)) ? INVALID_PIECE_MOVE : result;
 	result = (!result && areIndexesEqual(moveData)) ? INVALID_INDEXES_ARE_EQUAL : result;
 	result = (!result && isCheck(game, moveData)) ? CHECK_MOVE : result;
-	result = (result == CHECK_MOVE && isCheckmate(game, moveData)) ? CHECKMATE : result;
 
 	return result;
 }

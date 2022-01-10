@@ -76,11 +76,13 @@ int Pawn::pieceLegality(const string route, Piece*** board)
 	return DENIED_MOVE;
 }
 
+//getter
 bool Pawn::canBeTakenEnPassant() const
 {
 	return this->_enPassantFlag;
 }
 
+//setter
 void Pawn::setEnPassantFlag(const bool newState)
 {
 	this->_enPassantFlag = newState;

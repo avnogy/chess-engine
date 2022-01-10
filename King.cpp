@@ -1,5 +1,6 @@
 #include "King.h"
 #include "Rook.h"
+
 King::King(bool isWhite) : Piece('k')
 {
 	this->_canCastle = true;
@@ -70,11 +71,13 @@ int King::pieceLegality(const string route, Piece*** board)
 	return DENIED_MOVE;
 }
 
+//getter
 bool King::canCastle() const
 {
 	return this->_canCastle;
 }
 
+//setter
 void King::setCastleFlag(const bool newState)
 {
 	this->_canCastle = newState;
