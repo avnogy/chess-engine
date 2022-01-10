@@ -21,7 +21,7 @@ Pawn::~Pawn()
 }
 
 // returns true if pawn can move to the destination
-bool Pawn::pieceLegality(const string route, Piece*** board)
+int Pawn::pieceLegality(const string route, Piece*** board)
 {
 	string destination = "";
 	string source = "";

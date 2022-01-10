@@ -7,5 +7,5 @@ class Empty: public Piece
 public:
     Empty();
     ~Empty();
-    virtual bool pieceLegality(const string route, Piece*** board) override;
+    virtual int pieceLegality(const string route, Piece*** board) override;
 };
