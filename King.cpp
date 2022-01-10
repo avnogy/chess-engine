@@ -36,7 +36,6 @@ int King::pieceLegality(const string route, Piece*** board)
 				{
 					if (board[0][0]->getPieceType() == 'r' && ((Rook*)board[0][0])->canCastle())
 					{
-						setCastleFlag(false);
 						return CASTLING;
 					}
 				}
@@ -44,7 +43,6 @@ int King::pieceLegality(const string route, Piece*** board)
 				{
 					if (board[7][7]->getPieceType() == 'R' && ((Rook*)board[7][7])->canCastle())
 					{
-						setCastleFlag(false);
 						return CASTLING;
 					}
 				}
@@ -55,7 +53,6 @@ int King::pieceLegality(const string route, Piece*** board)
 				{
 					if (board[0][7]->getPieceType() == 'r' && ((Rook*)board[7][7])->canCastle())
 					{
-						setCastleFlag(false);
 						return CASTLING;
 					}
 				}
@@ -63,7 +60,6 @@ int King::pieceLegality(const string route, Piece*** board)
 				{
 					if (board[7][0]->getPieceType() == 'R' && ((Rook*)board[0][0])->canCastle())
 					{
-						setCastleFlag(false);
 						return CASTLING;
 					}
 				}

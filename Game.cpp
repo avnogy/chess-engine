@@ -286,6 +286,7 @@ void Game::execute(string moveData)
 	// updating king position
 	if (toupper(this->board[srcRow][srcCol]->getPieceType()) == 'K')
 	{
+		((King*)this->getPieceFromString(src))->setCastleFlag(false);
 		this->_players[currentPlayer]->_kingPosition = dst;
 	}
 
