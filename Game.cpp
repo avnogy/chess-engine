@@ -232,13 +232,30 @@ char* Game::move(string moveData)
 		{
 			// executing move
 			execute(moveData);
+			if (moveType == CASTLING)
+			{
+				if (src[1] - dst[1] > 0) //if went left
+				{
+					//string newMove = "a" + src[1] + (char)(src[0] - 1) + src[1];
+					//cout << newMove << endl;
+				}
+				else //went right
+				{
+					//string newMove = "h" + src[1] + src[0] + src[1];
+					//cout << newMove << endl;
+				}
+			}
+			else if (moveType == EN_PASSANT)
+			{
+				//TODO: reallocate en passant special code to here 
+			}
 		}
 	}
 	else
 	{
 		this->_outputCode[0] = '6';
 	}
-	if (this->_outputCode[0] == '0' && moveType != 1)
+	if (this->_outputCode[0] == '0' && moveType != NORMAL_MOVE)
 	{
 		//special move yay
 	}
