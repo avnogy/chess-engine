@@ -70,8 +70,6 @@ int Pawn::pieceLegality(const string route, Piece*** board)
 		&& ((Pawn*)board[srcRow][destCol])->canBeTakenEnPassant()) // can take en passant
 	{
 		// holy hell
-		delete (Pawn*)board[srcRow][destCol];
-		board[srcRow][destCol] = new Empty();
 		return EN_PASSANT;
 	}
 

@@ -222,6 +222,11 @@ char* Game::move(string moveData)
 	string src = "", dst = "";
 	utility::separateMove(moveData, src, dst);
 
+	//getting indexes
+	int srcRow = 0, srcCol = 0, dstRow = 0, dstCol = 0;
+	utility::stringToIndexes(src, srcRow, srcCol);
+	utility::stringToIndexes(dst, dstRow, dstCol);
+
 	//check piece validity
 	int moveType = this->getPieceFromString(src)->pieceLegality(moveData, (this->board));
 	if (moveType)
@@ -253,11 +258,13 @@ char* Game::move(string moveData)
 					execute(newMove);
 					this->switchPlayer();
 				}
-				this->printBoard();
 			}
 			else if (moveType == EN_PASSANT)
 			{
-				//TODO: reallocate en passant special code to here 
+				// holy hell procedure
+				delete (Pawn*)board[srcRow][dstCol];
+				board[srcRow][dstCol] = new Empty();
+				this->printBoard();
 			}
 		}
 	}
