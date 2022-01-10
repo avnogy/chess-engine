@@ -2,6 +2,7 @@
 #include "Utility.h"
 #include "Game.h"
 #include "Piece.h"
+#include <vector>
 
 #define VALID_MOVE 0 
 #define CHECK_MOVE 1
@@ -12,6 +13,11 @@
 #define INVALID_PIECE_MOVE 6
 #define INVALID_INDEXES_ARE_EQUAL 7
 #define CHECKMATE 8
+
+#define DST 2
+#define SRC 0
+#define ROW 1
+#define COL 0
 
 class Game;
 class Engine
