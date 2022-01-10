@@ -1,15 +1,15 @@
 #include "Player.h"
 
-Player::Player(const bool isWhite):_isWhite(isWhite)
+Player::Player(const bool isBlack) :_isWhite(!isBlack)
 {
 	//sets initial king position according to color
-	if (isWhite)
+	if (isBlack)
 	{
-		this->_kingPosition = "e1";
+		this->_kingPosition = "e8";
 	}
 	else
 	{
-		this->_kingPosition = "e8";
+		this->_kingPosition = "e1";
 	}
 }
 

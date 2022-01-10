@@ -4,7 +4,7 @@ class Player
 {
 public:
 	// constructor & destructor
-	Player(const bool isWhite);
+	Player(const bool isBlack);
 	~Player();
 
 	//getter
