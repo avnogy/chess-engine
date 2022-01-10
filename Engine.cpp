@@ -40,8 +40,8 @@ bool Engine::doesCauseDiscovery(Game& game, string moveData)
 	demoGame.switchPlayer();
 	demoGame.printBoard();
 	cout << "discovery:" << endl;
-	return checkCheck(demoGame);
 	demoGame.~Game();
+	return checkCheck(demoGame);
 }
 
 //returns true if out of bounds
@@ -231,8 +231,8 @@ bool Engine::isCheck(Game& game, string moveData)
 	demoGame.printBoard();
 	cout << "isCheck:" << endl;
 	//check if threatened the king
-	return checkCheck(demoGame);
 	demoGame.~Game();
+	return checkCheck(demoGame);
 }
 
 //checks for checks from enemy in position
