@@ -38,6 +38,8 @@ bool Engine::doesCauseDiscovery(Game& game, string moveData)
 
 	//check if discovered a check
 	demoGame.switchPlayer();
+	demoGame.printBoard();
+	cout << "discovery:" << endl;
 	return checkCheck(demoGame);
 }
 
@@ -222,14 +224,11 @@ bool Engine::isCheckmate(Game& game, string location)
 //is current move a check
 bool Engine::isCheck(Game& game, string moveData)
 {
-	//seperating src and dst
-	string src = "", dst = "";
-	utility::separateMove(moveData, src, dst);
-
 	//create a new game where the move is done
 	Game demoGame(game);
 	demoGame.execute(moveData);
-
+	demoGame.printBoard();
+	cout << "isCheck:" << endl;
 	//check if threatened the king
 	return checkCheck(demoGame);
 }
@@ -237,27 +236,34 @@ bool Engine::isCheck(Game& game, string moveData)
 //checks for checks from enemy in position
 bool Engine::checkCheck(Game& game)
 {
+	string kingLocation = game._players[game.currentPlayer]->_kingPosition;
+	Piece* king = game.getPieceFromString(kingLocation);
+	char kingType = king->getPieceType();
+
 	for (int row = 0; row < BOARD_SIDE_LENGTH; row++)
 	{
 		for (int col = 0; col < BOARD_SIDE_LENGTH; col++)
 		{
+
+			string pieceLocation = utility::indexesToString(row, col);
 			Piece* piece = game.board[row][col];
 			char pieceType = piece->getPieceType();
-			string pieceLocation = utility::indexesToString(row, col);
-			if (pieceType != '#' && piece->getPieceColor() == game.currentPlayer) //if current player is white value is zero so this is essentially like writing !!currentPlayer
+
+			if (pieceType != '#' && toupper(pieceType) != 'K' && isupper(pieceType) == !isupper(kingType))
 			{
-				string checktry = pieceLocation + game._players[game.currentPlayer]->_kingPosition;
-				if (game.getPieceFromString(pieceLocation)->pieceLegality(checktry, (game.board)))
+				string checktry = pieceLocation + kingLocation;
+				cout << checktry << endl;
+				if (game.getPieceFromString(pieceLocation)->pieceLegality(checktry, game.board))
 				{
-					if (canSrcMove(game, checktry) && !isPathBlocked(game, checktry) && !doesCauseDiscovery(game, checktry)) //board legality
+					if (!isPathBlocked(game, checktry)) //board legality //&& !doesCauseDiscovery(game, checktry)
 					{
 						return true; //piece can go there next move
 					}
 				}
 			}
 		}
-		return false;
 	}
+	return false;
 }
 
 int Engine::boardLegality(Game& game, string moveData)

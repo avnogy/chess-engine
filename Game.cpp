@@ -177,8 +177,11 @@ Game::Game(Game& other)
 	this->currentPlayer = other.currentPlayer;
 	
 	//copying right colors
-	this->_players[WHITE] = new Player(other._players[WHITE]->isWhite());
-	this->_players[BLACK] = new Player(other._players[BLACK]->isWhite());
+	this->_players[WHITE] = new Player(WHITE);
+	this->_players[BLACK] = new Player(BLACK);
+
+	this->_players[WHITE]->_kingPosition = other._players[WHITE]->_kingPosition;
+	this->_players[BLACK]->_kingPosition = other._players[BLACK]->_kingPosition;
 
 	this->_outputCode[0] = 0;
 	this->_outputCode[1] = 0;
@@ -277,7 +280,7 @@ void Game::execute(string moveData)
 	}
 
 	//end of turn
-	switchPlayer();
+	this->switchPlayer();
 }
 
 
