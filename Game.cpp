@@ -234,16 +234,26 @@ char* Game::move(string moveData)
 			execute(moveData);
 			if (moveType == CASTLING)
 			{
-				if (src[1] - dst[1] > 0) //if went left
+				string newMove = "";
+				if (src[0] - dst[0] > 0) //if went left
 				{
-					//string newMove = "a" + src[1] + (char)(src[0] - 1) + src[1];
-					//cout << newMove << endl;
+					newMove += "a";
+					newMove += src[1];
+					newMove += (char)(src[0] - 1);
+					newMove += src[1];;
+					execute(newMove);
+					this->switchPlayer();
 				}
 				else //went right
 				{
-					//string newMove = "h" + src[1] + src[0] + src[1];
-					//cout << newMove << endl;
+					newMove += "h";
+					newMove += src[1];
+					newMove += (char)(src[0] + 1);
+					newMove += src[1];
+					execute(newMove);
+					this->switchPlayer();
 				}
+				this->printBoard();
 			}
 			else if (moveType == EN_PASSANT)
 			{

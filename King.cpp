@@ -30,11 +30,11 @@ int King::pieceLegality(const string route, Piece*** board)
 	{
 		if (this->_canCastle)
 		{
-			if (source[1] - destination[1] > 0) //if went left
+			if (source[0] - destination[0] > 0) //if went left
 			{
 				if (!this->getPieceColor())//if white
 				{
-					if (board[0][0]->getPieceType() == 'R' && ((Rook*)board[0][0])->canCastle())
+					if (board[0][0]->getPieceType() == 'r' && ((Rook*)board[0][0])->canCastle())
 					{
 						setCastleFlag(false);
 						return CASTLING;
@@ -42,7 +42,7 @@ int King::pieceLegality(const string route, Piece*** board)
 				}
 				else //black
 				{
-					if (board[7][7]->getPieceType() == 'r' && ((Rook*)board[7][7])->canCastle())
+					if (board[7][7]->getPieceType() == 'R' && ((Rook*)board[7][7])->canCastle())
 					{
 						setCastleFlag(false);
 						return CASTLING;
@@ -53,7 +53,7 @@ int King::pieceLegality(const string route, Piece*** board)
 			{
 				if (!this->getPieceColor())//if white
 				{
-					if (board[7][0]->getPieceType() == 'R' && ((Rook*)board[0][0])->canCastle())
+					if (board[0][7]->getPieceType() == 'r' && ((Rook*)board[7][7])->canCastle())
 					{
 						setCastleFlag(false);
 						return CASTLING;
@@ -61,7 +61,7 @@ int King::pieceLegality(const string route, Piece*** board)
 				}
 				else //black
 				{
-					if (board[0][7]->getPieceType() == 'r' && ((Rook*)board[7][7])->canCastle())
+					if (board[7][0]->getPieceType() == 'R' && ((Rook*)board[0][0])->canCastle())
 					{
 						setCastleFlag(false);
 						return CASTLING;
