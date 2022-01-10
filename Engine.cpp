@@ -41,6 +41,7 @@ bool Engine::doesCauseDiscovery(Game& game, string moveData)
 	demoGame.printBoard();
 	cout << "discovery:" << endl;
 	return checkCheck(demoGame);
+	demoGame.~Game();
 }
 
 //returns true if out of bounds
@@ -231,6 +232,7 @@ bool Engine::isCheck(Game& game, string moveData)
 	cout << "isCheck:" << endl;
 	//check if threatened the king
 	return checkCheck(demoGame);
+	demoGame.~Game();
 }
 
 //checks for checks from enemy in position
@@ -279,4 +281,13 @@ int Engine::boardLegality(Game& game, string moveData)
 	result = (result == CHECK_MOVE && isCheckmate(game, moveData)) ? CHECKMATE : result;
 
 	return result;
+}
+
+bool Engine::canCastle(Game& game, bool color, string moveData)
+{
+	Game demoGame(game);
+	demoGame.execute(moveData);
+
+	demoGame.~Game();
+	return false;
 }
