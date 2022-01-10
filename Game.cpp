@@ -223,7 +223,8 @@ char* Game::move(string moveData)
 	utility::separateMove(moveData, src, dst);
 
 	//check piece validity
-	if (this->getPieceFromString(src)->pieceLegality(moveData, (this->board)))
+	int moveType = this->getPieceFromString(src)->pieceLegality(moveData, (this->board));
+	if (moveType)
 	{
 		//check board validity
 		this->_outputCode[0] = Engine::boardLegality(*this, moveData) + '0';
@@ -237,7 +238,10 @@ char* Game::move(string moveData)
 	{
 		this->_outputCode[0] = '6';
 	}
-	
+	if (this->_outputCode[0] == '0' && moveType != 1)
+	{
+		//special move yay
+	}
 	return this->_outputCode;
 }
 
