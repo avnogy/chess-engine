@@ -26,8 +26,6 @@ public:
 
 	static int boardLegality(Game& game, string moveData);
 
-	static bool canCastle(Game& game, bool color, string moveData);
-
 	//board validity functions
 	static bool canSrcMove(Game& game, string moveData);
 

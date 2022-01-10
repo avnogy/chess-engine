@@ -282,12 +282,3 @@ int Engine::boardLegality(Game& game, string moveData)
 
 	return result;
 }
-
-bool Engine::canCastle(Game& game, bool color, string moveData)
-{
-	Game demoGame(game);
-	demoGame.execute(moveData);
-
-	demoGame.~Game();
-	return false;
-}
