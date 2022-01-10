@@ -264,7 +264,6 @@ char* Game::move(string moveData)
 				// holy hell procedure
 				delete (Pawn*)board[srcRow][dstCol];
 				board[srcRow][dstCol] = new Empty();
-				this->printBoard();
 			}
 		}
 	}
@@ -272,10 +271,20 @@ char* Game::move(string moveData)
 	{
 		this->_outputCode[0] = '6';
 	}
+
+	//special moves yay
 	if (this->_outputCode[0] == '0' && moveType != NORMAL_MOVE)
 	{
-		//special move yay
+		if (moveType == EN_PASSANT)
+		{
+			//do something??
+		}
+		else if (moveType == CASTLING)
+		{
+			//do some other thing??
+		}
 	}
+
 	return this->_outputCode;
 }
 
