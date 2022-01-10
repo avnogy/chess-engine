@@ -3,6 +3,9 @@
 #include <thread>
 #include "Game.h"
 
+using std::cout;
+using std::endl;
+
 int main()
 {
 	srand(time_t(NULL));
@@ -47,6 +50,34 @@ int main()
 
 	// get message from graphics
 	string msgFromGraphics = pipe.getMessageFromGraphics();
+
+	cout << "###                      CHESS (TM)                      ###" << endl;
+	cout << "Original game by:             Garry Chess" << endl;
+	cout << "En Passant (TM) by:           George En Passant" << endl;
+	cout << "Final Boss:                   Anatolichess Karpov" << endl;
+	cout << "Frontend programming:         Erez Debugging" << endl;
+	cout << "Backend programming:          Nir Amir and Avner Mindelis" << endl;
+	cout << "Testing: Deep Blue, LCZ(TM), Stockfish" << endl;
+	cout << endl;
+	cout << "###                    SPECIAL THANKS                    ###" << endl;
+	cout << "Magnum Carlos" << endl;
+	cout << "Gotham Chess" << endl;
+	cout << "Agadmator Chess" << endl;
+	cout << "Ruy Lopez" << endl;
+	cout << "Hikaru Nakamura" << endl;
+	cout << "Tigran Petrosian" << endl;
+	cout << endl;
+	cout << "###                  NOT SPECIAL THANKS                  ###" << endl;
+	cout << "\"w\"esley \"s\"o" << endl;
+	cout << "Bobby Fischer" << endl;
+	cout << "Jeremy Checkers" << endl;
+	cout << endl;
+	cout << "###                     LAST CHANGES                     ###" << endl;
+	cout << "git commit -m \"bug fixes and performance enhancements\"" << endl;
+	cout << "git commit -m \"repairing the space-time continuum\"" << endl;
+	cout << "git commit -m \"repairing the space-time continuum\"" << endl;
+	cout << "git commit -m \"repaired the space-time continuum\"" << endl;
+	cout << "git commit -m \"whoops.\"" << endl;
 
 	while (msgFromGraphics != "quit")
 	{

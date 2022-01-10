@@ -249,7 +249,6 @@ bool Engine::checkCheck(Game& game)
 			if (pieceType != '#' && toupper(pieceType) != 'K' && isupper(pieceType) == !isupper(kingType))
 			{
 				string checktry = pieceLocation + kingLocation;
-				cout << checktry << endl;
 				if (game.getPieceFromString(pieceLocation)->pieceLegality(checktry, game.board))
 				{
 					game.switchPlayer();//for discovery check
