@@ -1,0 +1,4 @@
+In the file Rook.cpp
+Line 23
+
+There are magic numbers, Please use informative names for numbers to improve readability.
