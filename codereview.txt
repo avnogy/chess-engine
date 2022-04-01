@@ -1,0 +1,5 @@
+file: Game.h
+
+line 37:
+class fields should not be public, that is bad practice. instead using setters and getters is better.
+in addition, the board should be its own object because of the SRP (single responsibility principle).
